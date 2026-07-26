@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prévia navegável · Retrô Minimalista · App Tóca De Ouvido</title>
+</head>
+<body>
+<style>
+@font-face{
+  font-family:'Press Start 2P';
+  font-style:normal;font-weight:400;font-display:swap;
+  src:url(data:font/woff2;base64,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) format('woff2');
+}
+
+:root{
+  --p:#5A16AC; --pm:#7B35D4; --pl:#A070E8;
+  --gold:#C9A050; --gold2:#E8CB86; --goldD:#96701C;
+  --ink:#241539; --body:#4B4166; --muted:#8B7FAB;
+  --line:rgba(36,21,57,.09); --line2:rgba(36,21,57,.06);
+  --red:#D6455B;
+  --fa-branca:#B29FDD; --fa-azul:#3B7DD8; --fa-verde:#2E9E68; --fa-marrom:#9C6B3A; --fa-preta:#241539;
+
+  --stage1:#F4EFFC; --stage2:#E9E0F8;
+  --card:#ffffff; --s-ink:#2A1B45; --s-body:#5B4E77; --s-muted:#8B7FAB;
+  --bezel:#0E0A16;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --stage1:#160E24; --stage2:#0C0716; --card:#1E1530; --s-ink:#F3ECFF; --s-body:#C9BCE4; --s-muted:#9585B8; --bezel:#050308;}
+}
+:root[data-theme="light"]{ --stage1:#F4EFFC; --stage2:#E9E0F8; --card:#fff; --s-ink:#2A1B45; --s-body:#5B4E77; --s-muted:#8B7FAB; --bezel:#0E0A16;}
+:root[data-theme="dark"]{ --stage1:#160E24; --stage2:#0C0716; --card:#1E1530; --s-ink:#F3ECFF; --s-body:#C9BCE4; --s-muted:#9585B8; --bezel:#050308;}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--s-body);
+  background:radial-gradient(1000px 600px at 50% -8%,var(--stage1),transparent 70%),linear-gradient(180deg,var(--stage1),var(--stage2));
+  background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased;
+  padding:clamp(20px,4vw,48px) 16px 64px;
+}
+.pixi{display:inline-block;vertical-align:middle;image-rendering:pixelated}
+.px{font-family:'Press Start 2P',monospace;font-weight:400}
+
+/* ---------- header da página ---------- */
+.head{max-width:560px;margin:0 auto 30px;text-align:center}
+.eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--pm);font-weight:800;margin:0 0 12px}
+.head h1{font-size:clamp(26px,5vw,40px);line-height:1.06;margin:0 0 12px;color:var(--s-ink);font-weight:850;letter-spacing:-.02em;text-wrap:balance}
+.head p{font-size:15px;line-height:1.6;margin:0 auto;max-width:46ch;color:var(--s-body)}
+.head .note{font-size:12.5px;color:var(--s-muted);margin-top:12px}
+
+/* ---------- celular ---------- */
+.phone{width:352px;max-width:100%;margin:0 auto;background:var(--bezel);border-radius:48px;padding:12px;
+  box-shadow:0 40px 90px -34px rgba(20,8,40,.75),0 12px 30px -18px rgba(20,8,40,.6);position:relative}
+.phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:118px;height:22px;background:var(--bezel);border-radius:0 0 16px 16px;z-index:9}
+.screen{border-radius:36px;overflow:hidden;background:#fff;height:720px;display:flex;flex-direction:column;position:relative}
+.app{flex:1;overflow-y:auto;overflow-x:hidden}
+.app::-webkit-scrollbar{width:0}
+
+/* ---------- topo comum ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;padding:26px 22px 8px}
+.top .ttl{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.top .sub{font-size:11px;color:var(--muted);font-weight:600}
+.hr{height:1px;background:var(--line);margin:0 22px}
+
+/* subtabs */
+.subtabs{display:flex;gap:22px;padding:14px 22px 6px}
+.stab{background:none;border:none;padding:6px 0;font:inherit;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
+.stab.on{color:var(--ink);border-bottom-color:var(--p)}
+.stab:focus-visible{outline:2px solid var(--pl);outline-offset:3px}
+
+/* avatares */
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:850;flex:0 0 auto}
+.faixa-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto;box-shadow:0 0 0 1.5px rgba(0,0,0,.08)}
+
+/* selo */
+.selo{display:flex;align-items:center;gap:9px;margin:12px 22px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px}
+.selo .lab{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.selo .who{color:var(--ink);font-weight:800}
+
+/* ===== PLACAR ===== */
+.champ{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 22px 6px;text-align:center}
+.champ .crownwrap{margin-bottom:-6px}
+.champ .big{font-size:34px;color:var(--p);line-height:1}
+.champ .who{font-size:14px;font-weight:800;color:var(--ink)}
+.champ .fa{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:700}
+.champ .cap{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.rankrow{display:flex;align-items:center;gap:13px;padding:13px 22px;border-top:1px solid var(--line2)}
+.rankrow .pos{width:22px;text-align:center;font-size:13px;color:var(--muted)}
+.rankrow .nm{flex:1;min-width:0}
+.rankrow .nm b{display:block;font-size:13.5px;color:var(--ink);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rankrow .nm span{font-size:10.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px;margin-top:2px}
+.rankrow .sc{font-size:16px;color:var(--ink)}
+.rankrow.you{background:linear-gradient(100deg,rgba(90,22,172,.06),transparent);border-left:3px solid var(--p)}
+.rankrow.you .pos{color:var(--p)}
+.rankrow.you .youtag{font-size:9px;letter-spacing:.14em;color:var(--p);font-weight:850}
+.rankrow.you .sc{color:var(--p)}
+.rankrow .delta{font-size:10.5px;color:var(--verde,#2E9E68);font-weight:700}
+.more{text-align:center;font-size:12px;color:var(--muted);font-weight:600;padding:18px 22px 8px}
+
+/* ===== MURAL ===== */
+.meta{margin:16px 22px 6px;padding:14px 16px;border:1px solid var(--line);border-radius:14px}
+.meta .mt{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.meta .mt b{color:var(--p);letter-spacing:0;text-transform:none;font-size:13px}
+.meta .desc{font-size:12.5px;color:var(--body);margin:6px 0 10px;font-weight:600}
+.bar{height:8px;border-radius:6px;background:rgba(90,22,172,.10);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pl),var(--p))}
+.post{padding:16px 22px;border-bottom:1px solid var(--line)}
+.post .ph{display:flex;align-items:center;gap:10px}
+.post .ph .nm{flex:1;min-width:0}
+.post .ph .nm b{font-size:13.5px;color:var(--ink);font-weight:800;display:block}
+.post .ph .nm span{font-size:10.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
+.post .ph .when{font-size:10.5px;color:var(--muted);font-weight:600}
+.post .body{font-size:13.5px;color:var(--body);line-height:1.5;margin:11px 0 0}
+.post .body b{color:var(--ink)}
+.graus{display:flex;gap:6px;margin:10px 0 0;flex-wrap:wrap}
+.grau{font-size:11px;font-weight:800;color:var(--p);background:rgba(90,22,172,.08);border-radius:7px;padding:4px 9px}
+.thumb{margin-top:11px;height:92px;border-radius:12px;background:linear-gradient(135deg,#efe8fb,#e3d7f6);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--p);position:relative;overflow:hidden}
+.thumb .bpm{position:absolute;right:10px;bottom:8px;font-size:9px;color:var(--p)}
+.react{display:flex;gap:8px;margin-top:12px}
+.rbtn{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:none;border-radius:999px;padding:6px 11px;font:inherit;font-size:12px;font-weight:700;color:var(--body);cursor:pointer;transition:transform .1s ease,background .15s ease,border-color .15s ease}
+.rbtn:hover{transform:translateY(-1px)}
+.rbtn.on{background:rgba(90,22,172,.08);border-color:rgba(90,22,172,.3);color:var(--p)}
+.rbtn:focus-visible{outline:2px solid var(--pl);outline-offset:2px}
+.toca{margin-top:12px;padding:11px 13px;border-radius:12px;background:linear-gradient(180deg,rgba(201,160,80,.10),rgba(201,160,80,.05));border:1px solid rgba(150,112,28,.25);display:flex;gap:10px}
+.toca .ta{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--goldD));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:850;font-size:12px;flex:0 0 auto}
+.toca .tt b{font-size:11px;color:var(--goldD);font-weight:850;letter-spacing:.04em}
+.toca .tt p{margin:2px 0 0;font-size:12.5px;color:var(--body);line-height:1.45}
+.post.faixaup{background:linear-gradient(100deg,rgba(90,22,172,.05),transparent)}
+.faixaup .body{display:flex;align-items:center;gap:12px}
+
+/* ===== PERFIL ===== */
+.pf-hero{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 22px 6px;text-align:center}
+.pf-av{width:74px;height:74px;font-size:26px;background:linear-gradient(135deg,var(--pl),var(--p));box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(90,22,172,.18)}
+.pf-score{font-size:52px;color:var(--p);line-height:1;margin-top:8px}
+.pf-sclab{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;max-width:22ch}
+.pf-badge{display:inline-flex;align-items:center;gap:7px;margin-top:4px;padding:6px 13px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:800;color:var(--ink)}
+.pf-stats{display:flex;padding:14px 22px}
+.pf-stat{flex:1;text-align:center;border-right:1px solid var(--line)}
+.pf-stat:last-child{border-right:none}
+.pf-stat .n{font-size:15px;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:5px}
+.pf-stat .l{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:4px}
+.section-l{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800;padding:16px 22px 4px}
+.nextbar{margin:0 22px}
+.medals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:8px 22px 6px}
+.medal{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;padding:12px 6px;border:1px solid var(--line);border-radius:14px}
+.medal.lock{opacity:.55}
+.medal .mn{font-size:10px;font-weight:700;color:var(--body);line-height:1.25}
+.medal.lock .mn{color:var(--muted)}
+.mlist{padding:4px 22px 8px}
+.mlist .mi{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:1px solid var(--line2)}
+.mlist .mi .mt{flex:1;min-width:0}
+.mlist .mi .mt b{font-size:13px;color:var(--ink);font-weight:700;display:block}
+.mlist .mi .mt span{font-size:10.5px;color:var(--muted);font-weight:600}
+.mlist .mi .tom{font-size:12px;font-weight:800;color:var(--p);background:rgba(90,22,172,.07);border-radius:7px;padding:4px 9px}
+
+/* ---------- barra de navegação ---------- */
+.nav{flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-around;padding:8px 10px 14px;border-top:1px solid var(--line);background:#fff}
+.nib{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font:inherit;color:var(--muted);font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:4px 10px}
+.nib.on{color:var(--p)}
+.nib .ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.nib.plus{margin-bottom:2px}
+.nib .plusbtn{width:50px;height:50px;border-radius:16px;background:linear-gradient(180deg,var(--pm),var(--p));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -8px rgba(90,22,172,.8);margin-top:-18px}
+.nib:focus-visible{outline:2px solid var(--pl);outline-offset:2px;border-radius:8px}
+
+/* ---------- folha Registrar ---------- */
+.sheet{position:absolute;inset:0;z-index:20;display:none;flex-direction:column;background:rgba(20,8,40,.28);backdrop-filter:blur(2px)}
+.sheet.open{display:flex}
+.sheet .panel{margin-top:auto;background:#fff;border-radius:26px 26px 0 0;padding:10px 22px 26px;animation:slideup .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:none}}
+.grip{width:44px;height:5px;border-radius:3px;background:var(--line);margin:6px auto 16px}
+.sheet h3{margin:0 0 4px;font-size:16px;color:var(--ink);font-weight:850}
+.sheet .sh-sub{font-size:12.5px;color:var(--muted);margin:0 0 16px;font-weight:600}
+.choice{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:1px solid var(--line);background:none;border-radius:16px;padding:15px 16px;margin-bottom:11px;cursor:pointer;font:inherit;transition:border-color .15s ease,transform .1s ease}
+.choice:hover{transform:translateY(-1px);border-color:rgba(90,22,172,.35)}
+.choice .cico{width:44px;height:44px;border-radius:12px;background:rgba(90,22,172,.07);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.choice .ct b{display:block;font-size:14px;color:var(--ink);font-weight:800}
+.choice .ct span{font-size:12px;color:var(--muted);font-weight:600}
+.choice:focus-visible{outline:2px solid var(--pl);outline-offset:2px}
+
+.form label{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:14px 0 7px}
+.form input,.form textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;font-size:14px;color:var(--ink);background:#faf8fe}
+.form input:focus,.form textarea:focus{outline:2px solid var(--pl);outline-offset:0;border-color:var(--pl)}
+.keys{display:flex;gap:5px;flex-wrap:wrap}
+.key{flex:1;min-width:22px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 0;text-align:center;font:inherit;font-size:12px;font-weight:800;color:var(--body);cursor:pointer}
+.key.on{background:var(--p);color:#fff;border-color:var(--p)}
+.gchips{display:flex;gap:6px;flex-wrap:wrap}
+.gch{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;font:inherit;font-size:13px;font-weight:800;color:var(--body);cursor:pointer}
+.gch.on{background:rgba(90,22,172,.10);border-color:var(--p);color:var(--p)}
+.lockrow{display:flex;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:14px 0 7px}
+.cta{width:100%;margin-top:18px;border:none;border-radius:14px;background:linear-gradient(180deg,var(--pm),var(--p));color:#fff;font:inherit;font-weight:850;font-size:15px;padding:15px;cursor:pointer;letter-spacing:.02em}
+.cta:active{transform:translateY(1px)}
+.back{background:none;border:none;color:var(--muted);font:inherit;font-weight:700;font-size:12.5px;cursor:pointer;padding:6px 0;margin-bottom:2px}
+
+/* ---------- comemoração ---------- */
+.celeb{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;flex-direction:column;background:rgba(255,255,255,.82);backdrop-filter:blur(3px)}
+.celeb.open{display:flex}
+.celeb canvas{position:absolute;inset:0;width:100%;height:100%}
+.celeb .card{position:relative;text-align:center;z-index:2;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.celeb .big{font-size:16px;color:var(--p);line-height:1.7;margin-top:14px}
+.celeb .small{font-size:12px;color:var(--body);font-weight:700;margin-top:8px}
+
+.foot{max-width:560px;margin:34px auto 0;text-align:center;font-size:13px;line-height:1.6;color:var(--s-muted)}
+.foot b{color:var(--s-body)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+
+<header class="head">
+  <p class="eyebrow">Prévia navegável</p>
+  <h1>Retrô, mas <span style="color:var(--p)">minimalista</span></h1>
+  <p>Alma de jogo antigo (fonte pixel nos números, ícones 8-bit, comemoração com som) numa tela limpa e espaçosa.</p>
+  <p class="note">Toque na barra de baixo pra navegar. Toque no + pra registrar uma música (tem comemoração). O pixel fica só nos números, ícones e festa, o texto de leitura é fonte normal.</p>
+</header>
+
+<div class="phone">
+  <div class="screen">
+    <div class="app" id="app"></div>
+    <nav class="nav" id="nav"></nav>
+
+    <!-- folha registrar -->
+    <div class="sheet" id="sheet">
+      <div class="panel" id="sheetPanel"></div>
+    </div>
+
+    <!-- comemoracao -->
+    <div class="celeb" id="celeb">
+      <canvas id="confetti"></canvas>
+      <div class="card">
+        <div id="celebIcon"></div>
+        <div class="px big" id="celebTitle">MUSICA NA CONTA</div>
+        <div class="small" id="celebSub">Faixa Azul, 2 graus</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  Essa é a direção "joguinho antigo com alma minimalista". Se curtir, eu refino e aplico no app todo.
+  <br><b>Quer mais pixel (mais cara de arcade) ou menos (mais clean)? Me diz e eu ajusto a dose.</b>
+</footer>
+
+<script>
+/* =================== ícones pixel-art (arte original) =================== */
+function pix(rows,map,px){
+  px=px||3;var w=rows[0].length,h=rows.length,r='';
+  for(var y=0;y<h;y++)for(var x=0;x<w;x++){
+    var ch=rows[y][x];if(ch==='.'||ch===' ')continue;
+    r+='<rect x="'+(x*px)+'" y="'+(y*px)+'" width="'+px+'" height="'+px+'" fill="'+(map[ch]||'#000')+'"/>';
+  }
+  return '<svg class="pixi" width="'+(w*px)+'" height="'+(h*px)+'" viewBox="0 0 '+(w*px)+' '+(h*px)+'" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">'+r+'</svg>';
+}
+var G={gold:'#C9A050',goldD:'#96701C',gold2:'#E8CB86',p:'#5A16AC',pl:'#A070E8',ink:'#241539',red:'#D6455B',muted:'#8B7FAB',verde:'#2E9E68',azul:'#3B7DD8'};
+
+var ICON={
+ crown:[
+  "#...#...#",
+  "#...#...#",
+  "#.#.#.#.#",
+  "#########",
+  "#########",
+  ".#######.",
+  ".DDDDDDD."],
+ star:[
+  "....#....",
+  "....#....",
+  "...###...",
+  "#########",
+  ".#######.",
+  "..#####..",
+  "..#####..",
+  ".##...##.",
+  ".#.....#."],
+ flame:[
+  "...#...",
+  "..##...",
+  "..###..",
+  ".####..",
+  ".#####.",
+  "######.",
+  "#######",
+  "#######",
+  ".#####.",
+  "..###.."],
+ heart:[
+  ".##...##.",
+  "#########",
+  "#########",
+  "#########",
+  ".#######.",
+  "..#####..",
+  "...###...",
+  "....#...."],
+ note:[
+  ".....##.",
+  ".....##.",
+  ".....##.",
+  ".....##.",
+  ".##..##.",
+  "####.##.",
+  "####.##.",
+  ".##....."],
+ medal:[
+  "RR.....RR",
+  "RR.....RR",
+  "RR.....RR",
+  ".GGGGGGG.",
+  "GGGGGGGGG",
+  "GGGG.GGGG",
+  "GGG...GGG",
+  "GGGG.GGGG",
+  ".GGGGGGG."],
+ lock:[
+  "..###..",
+  ".#...#.",
+  ".#...#.",
+  "#######",
+  "#######",
+  "##...##",
+  "#######"],
+ play:[
+  "#....",
+  "##...",
+  "###..",
+  "####.",
+  "#####",
+  "####.",
+  "###..",
+  "##...",
+  "#...."],
+ metro:[
+  "...#...",
+  "...#...",
+  "..#.#..",
+  "..#.#..",
+  ".#.#.#.",
+  ".#.#.#.",
+  "#######",
+  "#######"],
+ belt:[
+  ".........",
+  "#########",
+  "#..###..#",
+  "#.#GGG#.#",
+  "#..###..#",
+  "#########",
+  "........."],
+ check:[
+  ".......#",
+  "......##",
+  "#....###",
+  "##..###.",
+  "###.##..",
+  ".####...",
+  "..##...."],
+ guitar:[
+  "......##",
+  ".....##.",
+  "..#.##..",
+  ".###....",
+  "####....",
+  "####....",
+  ".###...."]
+};
+function ic(name,color,px){
+  var map;
+  if(name==='crown')map={'#':color||G.gold,'D':G.goldD};
+  else if(name==='medal')map={'G':G.gold,'R':G.p};
+  else if(name==='belt')map={'#':G.ink,'G':G.gold};
+  else map={'#':color||G.ink};
+  return pix(ICON[name],map,px||3);
+}
+
+/* =================== dados =================== */
+var FAIXA={branca:'#B29FDD',azul:'#3B7DD8',verde:'#2E9E68',marrom:'#9C6B3A',preta:'#241539'};
+var AVCOL={'Val Cordas':'#E0662B','Deka':'#2E9E68','Tião Sena':'#3B7DD8','Mestre Rui':'#241539','Irmão Val':'#9C6B3A','Juninho PB':'#C9A050','Cléber':'#7B35D4','Você':'#5A16AC'};
+function ini(n){var p=n.split(' ');return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
+function avatar(nome,size){var s=size||40;return '<span class="av" style="width:'+s+'px;height:'+s+'px;font-size:'+(s*0.4)+'px;background:'+(AVCOL[nome]||'#7B35D4')+'">'+ini(nome)+'</span>';}
+function dot(f){return '<span class="faixa-dot" style="background:'+FAIXA[f]+'"></span>';}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+var PLACAR={
+ semana:{
+   champ:{nome:'Val Cordas',faixa:'verde',n:'9',cap:'músicas essa semana'},
+   rest:[{p:2,nome:'Deka',faixa:'azul',n:'7'},{p:3,nome:'Tião Sena',faixa:'azul',n:'6'}],
+   you:{p:7,n:'4',delta:'subiu 2 posições',faixa:'azul'},
+   selo:{lab:'Estreante da semana',who:'Juninho PB',ico:'star'},
+   more:'e mais 22 alunos tirando música essa semana'
+ },
+ faixas:{
+   champ:{nome:'Mestre Rui',faixa:'preta',n:'34',cap:'músicas no total, Preta 1º'},
+   rest:[{p:2,nome:'Val Cordas',faixa:'marrom',n:'24'},{p:3,nome:'Deka',faixa:'marrom',n:'13'}],
+   you:{p:12,n:'8',delta:'falta 1 pra Verde 2º',faixa:'verde'},
+   selo:{lab:'Subiu de faixa',who:'Cléber, Azul 2º',ico:'belt'},
+   more:'e mais 22 alunos na escada das faixas'
+ },
+ estudos:{
+   champ:{nome:'Deka',faixa:'azul',n:'4h20',cap:'de estudo essa semana'},
+   rest:[{p:2,nome:'Val Cordas',faixa:'verde',n:'3h50'},{p:3,nome:'Irmão Val',faixa:'azul',n:'3h10'}],
+   you:{p:5,n:'2h05',delta:'+40 min vs semana passada',faixa:'azul'},
+   selo:{lab:'Voltou com tudo',who:'Cléber',ico:'flame'},
+   more:'e mais 22 alunos estudando com o app'
+ }
+};
+var placarTab='semana';
+
+function screenPlacar(){
+  var d=PLACAR[placarTab];
+  var sub={semana:'Zera toda segunda',faixas:'Total acumulado, só sobe',estudos:'Tempo estudado na semana'}[placarTab];
+  var subtabs=[['semana','Semana'],['faixas','Faixas'],['estudos','Estudos']].map(function(t){
+    return '<button class="stab'+(t[0]===placarTab?' on':'')+'" data-ptab="'+t[0]+'">'+t[1]+'</button>';
+  }).join('');
+  var rows=d.rest.map(function(r){
+    return '<div class="rankrow"><span class="pos px">'+r.p+'º</span>'+avatar(r.nome,36)+
+      '<div class="nm"><b>'+r.nome+'</b><span>'+dot(r.faixa)+cap(r.faixa)+'</span></div><span class="sc px">'+r.n+'</span></div>';
+  }).join('');
+  return ''+
+   '<div class="top"><span class="ttl">Placar</span><span class="sub">Semana de 21 a 27 jul</span></div>'+
+   '<div class="subtabs">'+subtabs+'</div><div class="hr"></div>'+
+   '<div class="selo">'+ic(d.selo.ico,G.gold,3)+'<span class="lab">'+d.selo.lab+'</span><span class="who">'+d.selo.who+'</span></div>'+
+   '<div class="champ"><div class="crownwrap">'+ic('crown',G.gold,4)+'</div>'+
+     avatar(d.champ.nome,58)+'<div class="who">'+d.champ.nome+'</div>'+
+     '<div class="fa">'+dot(d.champ.faixa)+cap(d.champ.faixa)+'</div>'+
+     '<div class="big px">'+d.champ.n+'</div><div class="cap">'+d.champ.cap+'</div></div>'+
+   rows+
+   '<div class="rankrow you"><span class="pos px">'+d.you.p+'º</span>'+avatar('Você',36)+
+     '<div class="nm"><b><span class="youtag">VOCÊ</span></b><span class="delta">'+d.you.delta+'</span></div>'+
+     '<span class="sc px">'+d.you.n+'</span></div>'+
+   '<div class="more">'+d.more+'</div>';
+}
+
+/* =================== MURAL =================== */
+var REACT={r1:{on:false,n:12},r2:{on:false,n:5},r3:{on:false,n:8}};
+function reactBtns(id){
+  return '<div class="react">'+
+   '<button class="rbtn'+(REACT.r1.on?' on':'')+'" data-react="r1">'+ic('flame',REACT.r1.on?G.red:G.muted,2)+' '+REACT.r1.n+'</button>'+
+   '<button class="rbtn'+(REACT.r2.on?' on':'')+'" data-react="r2">'+ic('heart',REACT.r2.on?G.red:G.muted,2)+' '+REACT.r2.n+'</button>'+
+   '<button class="rbtn'+(REACT.r3.on?' on':'')+'" data-react="r3">'+ic('note',REACT.r3.on?G.p:G.muted,2)+' '+REACT.r3.n+'</button></div>';
+}
+function screenMural(){
+  return ''+
+   '<div class="top"><span class="ttl">Mural</span><span class="sub">Conquistas da turma</span></div>'+
+   '<div class="meta"><div class="mt"><span>Desafio da semana</span><b>47 / 60</b></div>'+
+     '<div class="desc">A turma tirou 47 músicas, faltam 13 pra bater a meta.</div>'+
+     '<div class="bar"><i style="width:78%"></i></div></div>'+
+   // post musica
+   '<div class="post"><div class="ph">'+avatar('Val Cordas',40)+
+     '<div class="nm"><b>Val Cordas</b><span>'+dot('verde')+'Verde 1º</span></div><span class="when">há 2h</span></div>'+
+     '<p class="body">Tirou <b>Faça Chover</b> de ouvido em G.</p>'+
+     '<div class="graus"><span class="grau">1</span><span class="grau">4</span><span class="grau">5</span><span class="grau">6m</span></div>'+
+     reactBtns('p1')+
+     '<div class="toca"><span class="ta">T</span><div class="tt"><b>Tóca respondeu</b><p>Isso, Val! Agora tenta a mesma em D sem olhar a cifra. Você consegue.</p></div></div></div>'+
+   // post estudo
+   '<div class="post"><div class="ph">'+avatar('Deka',40)+
+     '<div class="nm"><b>Deka</b><span>'+dot('azul')+'Azul 3º</span></div><span class="when">há 5h</span></div>'+
+     '<p class="body">Estudou <b>45 min</b> com o metrônomo.</p>'+
+     '<div class="thumb">'+ic('play',G.p,4)+ic('metro',G.pl,4)+'<span class="bpm px">90 BPM</span></div>'+
+     reactBtns('p2')+'</div>'+
+   // post faixa
+   '<div class="post faixaup"><div class="ph">'+avatar('Cléber',40)+
+     '<div class="nm"><b>Cléber</b><span>subiu de faixa</span></div><span class="when">ontem</span></div>'+
+     '<div class="body">'+ic('belt',null,4)+'<span><b>Subiu pra Azul 2º.</b> Já são 4 músicas de ouvido.</span></div>'+
+     reactBtns('p3')+'</div>';
+}
+
+/* =================== PERFIL =================== */
+var MEDALS=[
+ {n:'1ª música de ouvido',ico:'note',on:true},
+ {n:'1ª em 7 dias',ico:'flame',on:true},
+ {n:'Trocou o tom sem cifra',ico:'star',on:false},
+ {n:'Campo harmônico aplicado',ico:'check',on:false},
+ {n:'10 músicas de ouvido',ico:'medal',on:false},
+ {n:'Solo improvisado',ico:'guitar',on:false}
+];
+function screenPerfil(){
+  var med=MEDALS.map(function(m){
+    var inner=m.on?ic(m.ico,m.ico==='medal'?null:G.gold,3):ic('lock',G.muted,3);
+    return '<div class="medal'+(m.on?'':' lock')+'">'+inner+'<span class="mn">'+m.n+'</span></div>';
+  }).join('');
+  var musicas=[
+   {nome:'Faça Chover',tom:'G',data:'há 2 dias'},
+   {nome:'Oceanos',tom:'D',data:'há 5 dias'},
+   {nome:'Deus é Deus',tom:'Em',data:'semana passada'}
+  ].map(function(m){
+    return '<div class="mi"><div class="mt"><b>'+m.nome+'</b><span>tirei de ouvido, '+m.data+'</span></div><span class="tom">'+m.tom+'</span></div>';
+  }).join('');
+  return ''+
+   '<div class="top"><span class="ttl">Perfil</span><span class="sub">Só você edita</span></div>'+
+   '<div class="pf-hero">'+
+     '<span class="av pf-av">V</span>'+
+     '<div class="pf-score px">8</div>'+
+     '<div class="pf-sclab">músicas tiradas de ouvido</div>'+
+     '<div class="pf-badge">'+dot('verde')+'Faixa Verde, 1º grau</div></div>'+
+   '<div class="pf-stats">'+
+     '<div class="pf-stat"><div class="n">'+ic('flame',G.red,2)+'<span class="px">3</span></div><div class="l">semanas seguidas</div></div>'+
+     '<div class="pf-stat"><div class="n"><span class="px">2h05</span></div><div class="l">estudo na semana</div></div>'+
+     '<div class="pf-stat"><div class="n"><span class="px">1</span></div><div class="l">falta pra Verde 2º</div></div></div>'+
+   '<div class="section-l">Próxima patente</div>'+
+   '<div class="nextbar"><div class="bar"><i style="width:87%"></i></div></div>'+
+   '<div class="section-l">Medalhas</div><div class="medals">'+med+'</div>'+
+   '<div class="section-l">Suas músicas</div><div class="mlist">'+musicas+'</div>';
+}
+
+/* =================== navegação =================== */
+var SCREENS={placar:screenPlacar,mural:screenMural,perfil:screenPerfil};
+var current='placar';
+function renderNav(){
+  var items=[['placar','Placar','star'],['mural','Mural','heart'],['plus'],['perfil','Perfil','medal']];
+  document.getElementById('nav').innerHTML=items.map(function(it){
+    if(it[0]==='plus')return '<button class="nib plus" data-nav="plus" aria-label="Registrar"><span class="plusbtn"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="9.5" y="3" width="3" height="16" fill="#fff"/><rect x="3" y="9.5" width="16" height="3" fill="#fff"/></svg></span></button>';
+    var on=it[0]===current?' on':'';
+    return '<button class="nib'+on+'" data-nav="'+it[0]+'"><span class="ic">'+ic(it[2],it[0]===current?G.p:G.muted,2)+'</span>'+it[1]+'</button>';
+  }).join('');
+}
+function render(){document.getElementById('app').innerHTML=SCREENS[current]();renderNav();document.getElementById('app').scrollTop=0;}
+
+/* =================== folha Registrar =================== */
+function sheetChoices(){
+  return '<div class="grip"></div><h3>Registrar</h3><p class="sh-sub">O que você mandou ver hoje?</p>'+
+   '<button class="choice" data-reg="musica"><span class="cico">'+ic('note',G.p,4)+'</span>'+
+     '<div class="ct"><b>Música tirada de ouvido</b><span>nome, tom e os graus</span></div></button>'+
+   '<button class="choice" data-reg="estudo"><span class="cico">'+ic('metro',G.p,4)+'</span>'+
+     '<div class="ct"><b>Estudo com metrônomo</b><span>o app conta o tempo pra você</span></div></button>';
+}
+var selTom=null,selGraus={};
+function sheetFormMusica(){
+  var keys='C C# D D# E F F# G G# A A# B'.split(' ').map(function(k){
+    return '<button class="key'+(selTom===k?' on':'')+'" data-tom="'+k+'">'+k+'</button>';
+  }).join('');
+  var gr=[['1','maior'],['4','maior'],['5','maior'],['2','menor'],['3','menor'],['6','menor']].map(function(g){
+    return '<button class="gch'+(selGraus[g[0]]?' on':'')+'" data-grau="'+g[0]+'">'+g[0]+'</button>';
+  }).join('');
+  return '<div class="grip"></div><button class="back" data-reg="voltar">‹ voltar</button>'+
+   '<h3>Música de ouvido</h3><p class="sh-sub">Do jeitinho que você tirou.</p>'+
+   '<div class="form"><label>Nome da música</label><input placeholder="Ex: Faça Chover" value="Faça Chover">'+
+   '<label>Tom</label><div class="keys">'+keys+'</div>'+
+   '<label>Sequência de graus</label><div class="gchips">'+gr+'</div>'+
+   '<div class="lockrow">'+ic('lock',G.muted,2)+' Observação (só você vê)</div>'+
+   '<textarea rows="2" placeholder="Ex: travei na virada do refrão"></textarea>'+
+   '<button class="cta" data-reg="salvar">Registrar música</button></div>';
+}
+function openSheet(){document.getElementById('sheetPanel').innerHTML=sheetChoices();document.getElementById('sheet').classList.add('open');}
+function closeSheet(){document.getElementById('sheet').classList.remove('open');}
+
+/* =================== comemoração =================== */
+var AC=null;
+function beep(){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    var notes=[523.25,659.25,783.99,1046.5],t=AC.currentTime;
+    notes.forEach(function(f,i){
+      var o=AC.createOscillator(),g=AC.createGain();
+      o.type='square';o.frequency.value=f;
+      o.connect(g);g.connect(AC.destination);
+      var st=t+i*0.09;g.gain.setValueAtTime(0.0001,st);g.gain.exponentialRampToValueAtTime(0.14,st+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001,st+0.14);o.start(st);o.stop(st+0.16);
+    });
+  }catch(e){}
+}
+var confAnim=null;
+function celebrate(){
+  document.getElementById('celebIcon').innerHTML=ic('note',G.p,5);
+  document.getElementById('celebTitle').textContent='MUSICA NA CONTA';
+  document.getElementById('celebSub').textContent='9 músicas essa semana, subiu 1 posição';
+  var box=document.getElementById('celeb');box.classList.add('open');
+  beep();
+  var cv=document.getElementById('confetti'),ctx=cv.getContext('2d');
+  var W=cv.width=cv.offsetWidth,H=cv.height=cv.offsetHeight;
+  var cols=['#5A16AC','#A070E8','#C9A050','#E8CB86','#2E9E68','#3B7DD8'];
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ps=[];for(var i=0;i<(reduce?0:70);i++)ps.push({x:Math.random()*W,y:-20-Math.random()*H,s:5+Math.random()*5,vy:2+Math.random()*3,vx:-1+Math.random()*2,c:cols[i%cols.length],r:Math.random()*6});
+  var start=null;
+  function frame(ts){
+    if(!start)start=ts;var el=ts-start;
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(function(p){p.y+=p.vy;p.x+=p.vx;p.r+=0.2;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s);ctx.restore();});
+    if(el<2600)confAnim=requestAnimationFrame(frame);
+  }
+  if(!reduce)confAnim=requestAnimationFrame(frame);
+  clearTimeout(celebrate._t);
+  celebrate._t=setTimeout(function(){box.classList.remove('open');if(confAnim)cancelAnimationFrame(confAnim);},2400);
+}
+
+/* =================== eventos =================== */
+document.addEventListener('click',function(e){
+  var t;
+  if((t=e.target.closest('[data-nav]'))){
+    var n=t.getAttribute('data-nav');
+    if(n==='plus'){openSheet();return;}
+    current=n;render();return;
+  }
+  if((t=e.target.closest('[data-ptab]'))){placarTab=t.getAttribute('data-ptab');render();return;}
+  if((t=e.target.closest('[data-react]'))){var k=t.getAttribute('data-react');REACT[k].on=!REACT[k].on;REACT[k].n+=REACT[k].on?1:-1;render();return;}
+  if((t=e.target.closest('[data-reg]'))){
+    var r=t.getAttribute('data-reg');
+    if(r==='musica'){document.getElementById('sheetPanel').innerHTML=sheetFormMusica();}
+    else if(r==='voltar'){document.getElementById('sheetPanel').innerHTML=sheetChoices();}
+    else if(r==='estudo'){document.getElementById('sheetPanel').innerHTML=sheetFormMusica();/* preview usa o mesmo form */}
+    else if(r==='salvar'){closeSheet();celebrate();}
+    return;
+  }
+  if((t=e.target.closest('[data-tom]'))){selTom=t.getAttribute('data-tom');document.getElementById('sheetPanel').innerHTML=sheetFormMusica();return;}
+  if((t=e.target.closest('[data-grau]'))){var g=t.getAttribute('data-grau');selGraus[g]=!selGraus[g];document.getElementById('sheetPanel').innerHTML=sheetFormMusica();return;}
+  if(e.target.id==='sheet'){closeSheet();return;}
+});
+render();
+</script>
+</body>
+</html>
