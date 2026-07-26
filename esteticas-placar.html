@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudo de Estética · App Mentoria Tóca De Ouvido</title>
+</head>
+<body>
+<style>
+/* ============================================================
+   FONTE PIXEL (Press Start 2P) embutida como data URI woff2.
+   Usada SÓ no chrome do Arcade (números, títulos, labels).
+   ============================================================ */
+@font-face{
+  font-family:'Press Start 2P';
+  font-style:normal;font-weight:400;font-display:swap;
+  src:url(data:font/woff2;base64,d09GMgABAAAAABowAA8AAAAAT3QAABnUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCgGYACCdAiBYgmaFhEICut833YLgTYAATYCJAOBOgQgBYRKB4cLDIExG6tHB8a427DbAaRay+sjqlWnE0Wp4tw6UFX1nEBlDNshGUM5eAOCFBpGWzlXlTAwNFEGGPHdx4hHkE3lBA8Nix9xcQFLNKw+M9zBaavrtpeX4+f1f5jp2Uawh4/gwNFUqZQahs/HYKO0f+Px12lKLAk+EU+/+153mL18QugTGoZzhCanaPWffze/Xzs5Qe06EwjJpZCKg6c5pSJKr4iP67cbo/o188R0/O+JlsB2P7BRPKMky6IuAA8t4JJv1F5jtfcTBirJsPSd7xX1L0DEZuQElmWBDSHPvblPuHO2VOk6XV1hq9V1AAFIVf/TlhIUjZOoeZrv6k7aEG1IR0bQD0o2dyldlJntqqcN8MO5+FYRjTbSO3YWNr9fqX75uqfdGIDgt/eXwPGclZSkEin5f9kwmw23WPkW0lQgokwtU7BIw+tJBMB/uZefpDSJkLW3mOwvWbOHIqurjsEiFJLxOIypL+bF5LbNxOz4AgD6e1XL9j2AHPK0F3ApO22qHKff1YbadlHanYtKeP9/gPiAyCWwYICUyU2UNlB0JC+QAk5DBSdeSlnSaR2j5NzG0MVYX1c5xM6l3RYu6tY8//vJ6tjuiS8upfWofhB88RdLEkNIIhhsBh+HuCgY+/XVK36Ovf9PTW1/rSzSIeyE1O2+z38ZTmuZ6l9xKHgg65cQBMBBoxG6+9AUAofOqSPwAAAYAKyvAwCY+CndBQkQbhHmAIP3JWlFS3wEABKYlxdErJCviYoPAPmKnwKA+CmdKXgAAISv+1yZIgoojoUggsojERlVv9Apw+AAuMkeZDs72Onu67Fe6O0+Yt9iP2e/ZZ+xf0nbJBWv2G2qrGxHBzrRPexB9jR7jX3Avsm+y37F/sC+ljZLiS+POa3/bf2P62+AWfPbx5INwv8REJeg0ZmGzKjaZY8LrsIdeBRPAwAYdBLqWdDAikY2NLFr5tDCiVYutHFr50EHLzpNmeZHVgA5QeSFUBBGUQQlNmAjDJvQpWwzTFvAzZi1Fd22oSKKHpehl6xPTL+4AYpBCUNUwzQjthuVNKaOcSkT0ib5kME8O/6NfwvH3YvLuXw5azl+isvD17gciJ/+/xZuaNkhfloL/h//7ft0p7oGHcR0HCiw9gue8TVaJt9GtplaUtM5mulIQc2/bbBh54kcm5gl5gku/RYEnoIn6ZTTuaeg4xT8YIxMe9smxx18cDKgpRItRVV330Ur1twyB45tfwuGGkXJjGdUUZRG8imTSXB7YkqTbFKADw7AOZpb1iRwWMmQsox0cJQO6PgGqKqqqVFaVYixeKbqKeoYgEzNp6DEtyMlJdCiBBOzSqp6Ml2sWJwWaUfAlSx3jCXUKpBV+wjFlHUVOBq27BqlS9O0SqbtxLRt1nY1iloFjb1IShsXuR06nlHSaeXdFgJiYFmWVQkCQgmZwo5z0k5SlVLK06pjytVOfvKLYYdXfwIjKfFSvzyYTW+tTvBB6NgQgL01JI4D7L1TWghOpiYMGiXjFDcXW7DdT9nUDLQKFNWg09c1F+c4WSaOEaEHcJFjX6DW6RAr0RrFasd6uvUiCBXuyn1Pj06qAnTx1VIXKkpQurk4ge5aT68O+t7NG+EXw85GyefP4QlNNeVxgjyVT1/bj4Xt6uvSrrZbrlN+o7wT1/ZOWRPranDdgF7g5Qcp76uOtBboTatjFUENxXVG9xuRIgooqlOWt1hLpobmFll/MWVl3+A5Rg4EnbPrgUoXH9ENujnJnEWZyXdbgKDSJ3Gi1BLR5RsgqI+9CKGyH+lVAgZ0KoEOhawakEhr3/1+ggdmaKolYEnz5rSJT8+QXhBMe4b1Qm2IKAJsUETYqDDYpEiwWbHAFsUKWxUbbFPsg3VO8J+XlurafhRUpOWFclHPlFAiEju+YTqhxU48oKP6WM2d9hMvwyjKGMUYRjGOUVQwigmMoopR1DCK2zGKSYyWdIc6XqG+OtFfRU9k2ZtTWoJST9nfmAbH+i7rO56NDhghmKOSn8jGGF1SGhSgSRwXpkitsVMkClfinelophmhcLFSi8NDu63W+LlQRdsAKT2JkP5RRF4BU9f9Up6UlvGwk/dJm0ON0cQLBK897XFqd9VrwbNjyDZSQN97405XBERUVCUglOWxe6W5pVdYJSMemw32g1BC2zFO4VDKM+OISM13ZZk6mPhT0867Z02DAHWT8XaT9VDVFZApQSEAq6vHGxs78asgT8rmVdEmN8+HFXXMxtEoSvdQhomM56VMqxrfP55G4OlUKPJ8ehcEnmsg8nSfVPXDzQKQaTLMT4xCGx9SUGnjxs414SCFWBKQaTZuWVIzJfCATPPMVieTVBNfM5tM7lTPHB4WTF/SSEHq8CTyHm1yqSGQdgpiuiDDnBJIHwxTsUIt1tSElxcBpbnIWlR12souz2cxNL5FwKSkeLr4oCAYV5k+C0zqujHPhZKTOKH5gQzp43HbTGhErVVpGA+lQxuXX3HXjM1uQERWvM1djpmu5gNNx2y3kQel2XlsMkOqyHjFhkPgHiIpGtcoPguCWvXlCXhttys2poYBUxjN/xSj9CVvaK26aS1PTCxRfKu2QmUQmS4eVo/aM3wrVHhkOo+9Tnihuy1yOhW0k22dzenb3e8KSMzW2nFkwLHzFwaXQqQiqDBslIyYO+RiOctBqWrYtUB3wRGFYLSLgGMKyXFZrCgTRGCyi4BTClVPu68AughnVILZVQScUwnmjwIIF1SCxVUEXFJJLptGrqwgV1aRK1Xkcq3EHmUHlbCzi4C7FLJ324emugdNdS+a6j401f1oqgfQVA+iqR5Cc/9hB7mZtI9wsyy12FEsy2NvnxVo7DjukCyciJN6Mk5wKo88OJ6O5fFMLC/PEn7Hc+IO5+MEF+IEF/Mo3PFSrICXxwp4RayAVwoCV8UJro4TXJNHkeC1sSJeFyvi9bEi3iAI3BgnuClOr3ez/tXOhE+tS4QubbspJrav9+N5vInI8vPDgOn6jfbXRf5D/gP2F/IyDh/fgtqAElmoleqRgTjzQl48sBARAka6tUtNIHasMwK7OcuGIR5fuZDsUKrLFx6CmBxiIqbqIs/jUletX5cN1UuHf/kYl7u8DRkmzQl+iMjboesQy1F3sIJulsvrqkg3eXbdBA+UMY6vr4tQg+HP0IFZpckusrPpfimZidwiGZiniomNccn1arla2Vsfa7fdEh0qpibC0kTTMPS6KBg1LrB2UqXTSKUqheTS3AujX9A9qpkDrsJlj9wfXK4oigoXw3QYKoIA6yW42ZDN+VqHFegQrM8Akf6QJSipo/1suu/F0MBsZBaDJBtVRmeyEmANB56Mgos1Fq27+A46WE9mAhq9Vwqjwk/7M3ikid2pI9CZNtip3N/DfK1ldVezy4P8brHuOQrThIBTh+0QrwIjnZOqAX8MFftVISCp0ZB7ugO4TKN2j27iAH6RuQx80yQLDCsUI2aGCVITtumzoYgJdlJnwkSUI4jntBUWHDwxMEVYqBjY7zxOgEW3zpAV4TtetFBwYJRwYA1Z1c06sgS5THCypOW5WqYpM0EpI+zIu8CE9FPC61xud6YXIUlUByEqtx1Xdk1uHvT2dbst1NHm+pp1MpDetNDSFnDAB8wqShBqyoqa8JLytNvw/qQgrqRylLh7tmmMZ6Y9POR2forKyEyzohEoPygnVZBxv400EvM3i+a2fS7G0FkVMJBOUwUTfr132o1+6bNEpov8ZYUbiserX0GEg96Uk8W2mvZFS6c9TtjQj4r4dhH5jHAwYI+h6IijG8o+e1vldX+UCfH8e8v0yjTCSRflMUNjvQoiRcIl2kY6s7wLbjs3n0Oabv8eZM7VdI57IyjeqNtvltu6kQOhMpHyLjT9iOBfcz3KVBLSL0h+p0Ms5kyils1ohB7z3K2feIq9RJ9+9B3InWsfucn3BvuJ31YS1WtGrld1XVIIU6EhCUeosto6lOv2Tf0xthyhVK47QKIjSVesY1JNY3FvOHJgNk1gBqDGPA6S9um3QD0oOtBu4NLlJuISY+eU9COIc/bdjOHmUQw7XIJqoKm1mYkA3h04VJ9c46bvvWKGHLpqlF4u6Pcjn4sFemUnL/fn4hAgE6n83FiSErEGPdrlrrBzx70y4DFIypQe8ccyrHxjzDBcYBR6jOVRO3d8yYOMUG+lgruoBip/3ThNSfoo1EqveKVVr2NpkSWkibK2goLnXFI3vfDbscHjYkUJ1NP+xjK3jJ3cwK01p3zSAj8+8v5tIkm6cVkEMlFbiy6Z8SthDIMAEYFMM3e2mwaN4ezBnxwlFGPkNzk2WkTZ9PeztOdio2H5oFIc5d3m7C4iy3UMOPqk257Iu3k4rMKNUQ0mM22FYZcnA8xzBihUaobrZhyfNIv7y+R+KROYVhpI7tKkX9ilBhdDZLQ7i5Me5JAbveo1SZsE2wXcHGcXMajy7UQu8STqkO44ZnHwoibLgbiQTE0Cb+IvyXgs8qRbVt1jDUp2g4xuwd8rNkch4AndfyDnwk43EefDvUsAki+BJ8HugOiGvcgJmExpcmNbORRoTvvulWyMswQ8WNmRoqFRwbn7j9PItFmVGpnzYI7by9VIrvx+HGGYRC+ToK3M16vVwhbDFsk9oXTENCy1zI3gOc2bjDZdmk9zctz9EYO9vR/5oKJYITuuzUDKXAOaQm+tCdM0DSrWloEtz2vZaC5Nhj02bgMPNPAqFlXNWs24poJn8F3Rcji+TMLFMo8AhNNS0Z0dSxq4ILrNKPmPwndkf6F6QsfCt0Mmy/PfjN6BIwsnk1AJIcm5n1oFIqU4J8GiEjU20l0Gp0mY0PRrl4wV6Go7b9wgfAnZTrqzYyUHbBs+D9Sai8s3eMvijxY/NNZZt/V18ncT7IHiYzG4XoYeGiDyw7mOtmOhYQuFRfNOPocPXC7KNwYq2JN2ahgIBem1H4VDzGEf/cCC+Mr/f9tMCOkvacOQSEbsiQcFOTyPRgAlMHA5XeiFboBWuiLPT48POOLIfJs1X38d/Nf/9ashABLCfaPleW53aqXcIg+g1A9SOl3OwqrSFZHtMpjncgsdplTKWq73MsfyZKc3aG7zTj/WuenjqzXgy2+j//GYfN7W04e3L/5c7RumHdphnmrJAYcfj8dnf/3VqNAoKMeOCgp8FiEhGGFQnDvKpwtpenOguuoVgdTbWENFxePY6m8fflshUaa7IoVQBYMaqWcf9Gx2vZvQ2p1a13q9V/vwG0xId9owRwR4hZ/m7Bw7+bYtDkSuV1gpCSc81/FuuEt+3FS+3ksRPq+8U2327cABB13HZj/Fmyai8MRerZd7JedGS9INkfU9busgnAfv1ax5alS1OXARPMLXRC30FEIbeahslGwGbSJxr+UphbD+oDXp+4bBX+dknuXW+V7YHZYb9st5ud6rd8QL0Xa60NysCfyoqYlYnPYl7bejxRBdnuNQqPbiL1+EKiam9p47noAyYdCRqeQBzvSuGHE4D0adO9v5dIkTTHKdLTjvR3CG3tbYwOMXyVhATY11x0RFq4Nksj8KQRPpR3qJ3jcccbog2C4UXwPj3DSlrsU/PWk5/PEhvxxC8nnJUx0e2DGJp3ZXkIgaaHRK0V5QvU9U9g5bcjP5TiJyWgHkBqPG+2IYnzfvlyEGy/My56HX+btlK3dEkiDp/eKCkNEnm3lvgv8mlnJfyTlbAOKbBPPKCWvkgs476FnD1vMT8PT2xMRWmcbDQkYKiQRLI49WSvklLwioA53pOqnG8PVXIwFLOhJegjaa+Qe5KFUjTGiwRMUk2TtIjOpHbZ3ZtosslbwXFv3xc4lOjXPkZ0gxAO3KHSaOHmQ295/5itjIhEuZs2NOuCftcoWNpBeKjfn1XrG/XpcE3yHcJOWMBiaO46J9LudMsUjGsETERmUvqTaWsVsTrLhan2c2kgBhkoHAQhc0mDquafJ9hiaORlI0Ma3zqiWedjGjMzXWNkZZQFLgFavoJnu8F6nMte875gLuiTggZ7EyzTuwB3JCOj74M5P4osmcKfyDVE73lcqtfqIjvMToPZWYRckFda/fvI2X0y7UUm6p7nBB8WcIZm2cxvQuVR5ljwsfsCwy8Skm0fvGJPME802U3MrYbUlbLwDadrZkGvmZN823wOCc15za5WbKs047XIDyGc42N1gVgdZcUrwGZwbFZas8/oAch5rosHnRLHFSeYA0xXSc4x0PwgQsyzD6iGT6zpCR8miVjQnFcGQC3ZNLTinchvWA4wg8PLO3e3pEczj9osaegi80i8/jtIfRDzdUKaiVt+iLTf06HNI0rdM1vZT41ubwQhmgPD+rTqzUmUrUMqhwDR8bupCYSh8GaNlU/awn7dgvjsf12PofYIRAJI2BI7vk0ebfU+b+riz5zdUZzsOzqJYyvcg8BUW9/ICJmq2ObtMEbEOptYTmm3cKi9H/8/wWvVaWX2Iqo0FSVMZqjS3+qHJ41/SSe6cFavoyxGPs8fBHgXddY9KqYLRVVpoGBrZ8jVfjyrm3wdImikJje6TGCiq0hI7d0Ah2NF+Nu9TeQ2E+D5E1j6crW9y2XDFJnQYToS0+BgDqESKZG5Re+We+8oozfni16+uS2ii/nvgoMndZnIM2QElmv1izMg7SIc8oWhYt2oLhNEkIPwTkbA9xIceTosC5OY/4bz2d0ZP/wBMEStYy3OqgnTz1hpbt5qlT2m/v24HT2IvzcT5fekwx0x/1ID0TqGCsyZKIQmhQHLE0NiK498lhUfXjFXh5e9kZ3NuJCVMGH9bpELjE/HDGoGXqyZhj233oapQI6DwYZjxL2s5x81tki22XoScIBrqTmbyYD1EGUqc2d82e0bc1RaxxvVd9ufNrO1DY2nV+ukxPr0+4WtZrbtHzvbgUi0/Fxttlu1ejpodXpDgyOqVNp8K2fkIL2PLQq9YALpGOVCl6KHcOieuWb5u7vRsjh0AJOgoRflL0FZWhYEN53g6RDSxPb/Q7RSl5SaPXU8l9HYz3Rzbcr+AisIrdhIsKNxt3O74xNaJ7QYZivQ2o+y1y05yNy+ukFDO/0xKQ71i29Ae9aPfBtvkRGWZ8Y/Q6uFe2gdHitsMNkjJ2IHHqfH4S58R0181URwlSeHYKWJzHGt/Btms26afDWpii0rc2b9wvNDAxL1JHjAh3I5APPhbcTF/rDCXldJt1srAyVeV6GmiH8Tl0fMBXJhNmbtRuq2ybv1XKTjKWCUZ1kHCSkULxehkc98Gw3lLa2a7yMlOjb1tjO0MiMgbdG+izwuCnVaac/fW6GPEOU5JtwZboYHKBaKJxkckbtO5l0LtfaUY4XyoMWCpyTgdYjUMcsnxolw0znwCNw9gnPckcpUdl5P8y8y+Kzd8IpSZVfnHZ4ShJysDAOXHw28yKWlqOmwvvZHj8yyJHQcAvvovm5tn2H0lTa4OAVBUkTAgK4r3V2C6MWm5eSlnLlbLLHs+R/qomaDDO9jGRwD4Fvxf6yNqbmqwvBx5yiYErwQUDL4mAzytABwSZYPlLJlKSPW1iWYiOyqUOFA5WyBohMK5qjmqC67Phbe2RMb2hLcNh2hA92cpZmJikTSPibUHdXh/G1LF55+t3r2p5XV5f/hgp0Z82zjp/xjCValtJ1Baet3iubaVPW+mcXBhQDsnlNRhwqU4B0aptzsTv+/LrMyJ6aop/KZUP23+FY7Ll27/mlnxULShImQYBiGKQZpv8zPo+1WA4HiXsTtw5MfXWikoZ23gDmaKbEZ8RGirmrBQ1KuMzzbHXxQA7030RMBVQbqqaSMiJ//c8+g4XnZ3+5xx1scXb5m+QPTJVVAZS/WRhsNAKI5qxjgYnX/AzLeMrkzLfRClR3eGCwmfgGk1i3BpeCLtXFTBWy989T+TEPgAIwmhhgGRDrso0VnyFc/J6m+jfuhkiAfrem7nlu1MLWa42OA/+dRDDzNXlyr9FozJXRzkpdrhgfAcabWW29tr2zcYd8opA1wcgAh3zt5f2KHybKH4KAD/aXgPtypl3z39/8j/VrP+5VgjAIAH/x98TYrwOBIbg4HImszE6Xk5xscu5vB2dzHA5Nzrs1kUaXjZgQYYLCc8/fcO4WwG84W4gEAAb9hBBzA74BTl4qwlb8fVqAR78brWIEg+vZtCdWS1hM5ZWW5DUZnnKHmCfU+y5x+Q0Vp+00wn7detUPrLByS/OIQ2OOmGvRqN6DBlzwm4nnTTplDUnnNJiTL0Ju+112qFea0a1T0AtdNQRslYNmhpN13a5sOW6G7lZ+WdNHjdvQkXellZudPO13FHHnMdhYK99/cUmza+ibMrA3ZGBuFTtUQfstvNa7HIa7H04kmIxaadWu8t5hgvo4O4go+Gq5/o6dLKz9isLROyTaDaesdsusp6CTIyNWHPYtrnH61KcAObVrr+KFv8DLMDxqKgYhhMkhUrrg8lmy449B46cOHPhyo07D568ePPhi29x47BxJaFq25N1qbRe39DY1NzS2tbe0ZnJ5vKFYqlsdJm4bpUevfr0Dxg0ZNiI0THjJkyaMj1j1lwj///v9JH9IEZtkyqnSCURJlSmCs7qpTSriMnrhtV6DhCYrgXEhMmrR4SJvDpAhG2xK1YPfuGyvvCnK8GDcKl7SWO7GUeqreNSO2Qg5tI6TLl0EFMu9fBnpEm0l5+9QVr9QdAyGwZ/4eOJWIjumCf9t/D7zwVW8/uh/XppCinex9cLHxYGC35h0c5sLw5XM+Mz2Zl4+uY0/2+4yn+V8yoLwGCnxTvxQeNEXovoLonxm8YjjS9z6rJr1R7+2K4CsXHfuR9Fr7r8+Hohz/XPNc9tsTJX6hetX19jt78oRJ6/Srtm0N0HAAA=) format('woff2');
+}
+
+/* ============================================================
+   TOKENS DA MARCA (iguais em todas as estéticas)
+   ============================================================ */
+:root{
+  --p:#5A16AC; --pm:#7B35D4; --pl:#A070E8; --pdark:#6B1BD1;
+  --gold:#C9A050; --gold2:#E8CB86; --goldD:#96701C;
+  --ink:#241539; --bodytext:#4B4166; --muted:#8B7FAB;
+  --fa-branca:#B29FDD; --fa-azul:#3B7DD8; --fa-verde:#2E9E68;
+  --fa-marrom:#9C6B3A; --fa-preta:#241539;
+
+  /* Harness (a página que segura os 3 celulares) */
+  --bg1:#F5F0FD; --bg2:#EBE1FA;
+  --panel:#ffffff; --hair:rgba(36,21,57,.10);
+  --h-ink:#2A1B45; --h-body:#5B4E77; --h-muted:#8B7FAB;
+  --bezel:#0E0A16;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg1:#160E24; --bg2:#0E0818;
+    --panel:#1E1530; --hair:rgba(255,255,255,.10);
+    --h-ink:#F3ECFF; --h-body:#C9BCE4; --h-muted:#9585B8;
+    --bezel:#050308;
+  }
+}
+:root[data-theme="light"]{
+  --bg1:#F5F0FD; --bg2:#EBE1FA;
+  --panel:#ffffff; --hair:rgba(36,21,57,.10);
+  --h-ink:#2A1B45; --h-body:#5B4E77; --h-muted:#8B7FAB; --bezel:#0E0A16;
+}
+:root[data-theme="dark"]{
+  --bg1:#160E24; --bg2:#0E0818;
+  --panel:#1E1530; --hair:rgba(255,255,255,.10);
+  --h-ink:#F3ECFF; --h-body:#C9BCE4; --h-muted:#9585B8; --bezel:#050308;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--h-body);
+  background:
+    radial-gradient(1200px 700px at 50% -10%, var(--bg1), transparent 70%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  background-attachment:fixed;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  padding:clamp(20px,4vw,56px) 16px 72px;
+}
+
+/* ============================================================
+   HEADER DO ESTUDO
+   ============================================================ */
+.head{max-width:1160px;margin:0 auto 34px;text-align:center}
+.eyebrow{
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--pm);font-weight:800;margin:0 0 12px;
+}
+.head h1{
+  font-size:clamp(28px,5vw,46px);line-height:1.05;margin:0 0 14px;
+  color:var(--h-ink);font-weight:850;letter-spacing:-.02em;text-wrap:balance;
+}
+.head h1 .em{color:var(--p)}
+@media (prefers-color-scheme:dark){.head h1 .em{color:var(--pl)}}
+:root[data-theme="light"] .head h1 .em{color:var(--p)}
+.head p.lede{
+  font-size:clamp(15px,2vw,18px);line-height:1.6;max-width:60ch;margin:0 auto;
+  color:var(--h-body);
+}
+.head p.note{
+  font-size:13px;line-height:1.6;max-width:56ch;margin:14px auto 0;
+  color:var(--h-muted);
+}
+
+/* Controle mestre de abas */
+.master{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;
+  max-width:1160px;margin:26px auto 6px;
+}
+.master .lbl{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--h-muted);font-weight:700;margin-right:6px;
+}
+.mtab{
+  border:1px solid var(--hair);background:var(--panel);color:var(--h-body);
+  font:inherit;font-weight:700;font-size:13px;
+  padding:9px 15px;border-radius:999px;cursor:pointer;
+  transition:transform .12s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.mtab:hover{transform:translateY(-1px)}
+.mtab[aria-selected="true"]{
+  background:linear-gradient(180deg,var(--pm),var(--p));color:#fff;border-color:transparent;
+  box-shadow:0 8px 20px -8px rgba(90,22,172,.7);
+}
+.mtab:focus-visible{outline:3px solid var(--pl);outline-offset:2px}
+
+/* ============================================================
+   PALCO / GRID DOS CELULARES
+   ============================================================ */
+.stage{
+  max-width:1160px;margin:26px auto 0;
+  display:flex;flex-wrap:wrap;gap:clamp(22px,3vw,44px);
+  justify-content:center;align-items:flex-start;
+}
+.col{width:340px;max-width:100%;display:flex;flex-direction:column;gap:16px}
+.col-head{display:flex;align-items:baseline;gap:10px;padding:0 4px}
+.col-head .k{
+  font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pm);
+}
+.col-head .k b{color:var(--h-ink);font-weight:850}
+.caption{
+  background:var(--panel);border:1px solid var(--hair);border-radius:16px;
+  padding:15px 17px;font-size:13.5px;line-height:1.55;color:var(--h-body);
+  box-shadow:0 10px 30px -22px rgba(36,21,57,.6);
+}
+.caption b{color:var(--h-ink)}
+.caption .warn{
+  display:block;margin-top:9px;padding-top:9px;border-top:1px dashed var(--hair);
+  color:var(--h-muted);font-size:12.5px;
+}
+
+/* ============================================================
+   MOLDURA DO CELULAR
+   ============================================================ */
+.phone{
+  width:340px;max-width:100%;
+  background:var(--bezel);
+  border-radius:46px;padding:12px;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.06) inset,
+    0 40px 80px -30px rgba(20,8,40,.7),
+    0 12px 30px -18px rgba(20,8,40,.6);
+  position:relative;
+}
+.phone::before{ /* notch */
+  content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  width:110px;height:22px;background:var(--bezel);border-radius:0 0 16px 16px;z-index:5;
+}
+.screen{
+  border-radius:35px;overflow:hidden;background:#fff;
+  height:640px;display:flex;flex-direction:column;position:relative;
+}
+.app{flex:1;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
+.app::-webkit-scrollbar{width:0}
+
+/* Barra inferior de navegação (comum, só decorativa) */
+.nav{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-around;
+  padding:9px 8px 12px;border-top:1px solid rgba(36,21,57,.08);background:#fff;
+}
+.nav .ni{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:9px;font-weight:700}
+.nav .ni.on{color:var(--p)}
+.nav .dot{width:20px;height:20px;border-radius:7px;background:currentColor;opacity:.9}
+.nav .plus{
+  width:44px;height:44px;border-radius:15px;margin-top:-16px;
+  background:linear-gradient(180deg,var(--pm),var(--p));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;
+  box-shadow:0 10px 20px -8px rgba(90,22,172,.8);
+}
+
+/* ---------- estrutura interna comum (estilizada por estética) ---------- */
+.topbar{padding:22px 18px 12px;display:flex;flex-direction:column;gap:2px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand .logo{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--pl),var(--p));flex:0 0 auto}
+.app-name{font-size:13px;font-weight:850;letter-spacing:.02em;color:var(--ink)}
+.week{font-size:11px;color:var(--muted);font-weight:600}
+
+.chips{display:flex;gap:7px;padding:4px 14px 12px;overflow-x:auto}
+.chips::-webkit-scrollbar{height:0}
+.chip{
+  flex:0 0 auto;border:1px solid rgba(90,22,172,.28);background:#fff;color:var(--p);
+  font:inherit;font-weight:700;font-size:11.5px;padding:8px 12px;border-radius:999px;cursor:pointer;
+  white-space:nowrap;transition:all .16s ease;
+}
+.chip.on{background:var(--p);color:#fff;border-color:var(--p)}
+.chip:focus-visible{outline:3px solid var(--pl);outline-offset:2px}
+
+.selo{
+  margin:0 14px 12px;padding:9px 12px;border-radius:12px;
+  background:linear-gradient(90deg, rgba(201,160,80,.16), rgba(232,203,134,.10));
+  border:1px solid rgba(150,112,28,.28);
+  display:flex;align-items:center;gap:9px;font-size:11.5px;color:var(--goldD);font-weight:700;
+}
+.selo .ico{font-size:15px;line-height:1}
+.selo .who{color:var(--ink);font-weight:800}
+.selo .lab{color:var(--goldD);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:10px}
+
+/* Pódio */
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:9px;padding:6px 14px 14px}
+.pcol{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;max-width:96px}
+.avatar{
+  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:850;font-size:17px;position:relative;flex:0 0 auto;
+  border:3px solid #fff;box-shadow:0 0 0 3px rgba(0,0,0,.06);
+}
+.pcol.first .avatar{width:62px;height:62px;font-size:20px}
+.crown{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:20px;line-height:1;filter:drop-shadow(0 2px 1px rgba(150,112,28,.5))}
+.pname{font-size:11px;font-weight:800;color:var(--ink);max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}
+.pfaixa{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);font-weight:700}
+.fdot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 1.5px rgba(0,0,0,.08)}
+.pedestal{
+  width:100%;border-radius:12px 12px 4px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;padding:8px 4px;gap:1px;
+  background:linear-gradient(180deg,var(--pm),var(--p));
+}
+.pcol.first .pedestal{height:96px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#4a370c}
+.pcol.second .pedestal{height:74px}
+.pcol.third .pedestal{height:60px}
+.pbig{font-size:22px;font-weight:850;line-height:1;font-variant-numeric:tabular-nums}
+.pcol.first .pbig{font-size:26px}
+.punit{font-size:8.5px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.prank{font-size:10px;font-weight:800;opacity:.7}
+
+/* Linha VOCÊ */
+.you{
+  margin:2px 14px 12px;padding:12px 14px;border-radius:16px;
+  background:linear-gradient(100deg, rgba(90,22,172,.10), rgba(160,112,232,.08));
+  border:1.5px solid rgba(90,22,172,.35);
+  display:flex;align-items:center;gap:12px;position:relative;
+}
+.you .rk{font-size:15px;font-weight:850;color:var(--p);font-variant-numeric:tabular-nums;min-width:26px;text-align:center}
+.you .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:850;font-size:14px;flex:0 0 auto;border:2px solid #fff;box-shadow:0 0 0 2px rgba(90,22,172,.25)}
+.you .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.you .youtag{font-size:10px;font-weight:850;letter-spacing:.12em;color:var(--p);display:flex;align-items:center;gap:6px}
+.you .delta{font-size:12.5px;font-weight:800;color:var(--ink)}
+.you .sub{font-size:11px;color:var(--muted);font-weight:600}
+.you .val{text-align:right;flex:0 0 auto}
+.you .valn{font-size:19px;font-weight:850;color:var(--p);font-variant-numeric:tabular-nums;line-height:1}
+.you .vall{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+.more{
+  margin:0 14px 16px;text-align:center;font-size:11.5px;color:var(--muted);font-weight:600;
+  padding:9px;border-radius:10px;background:rgba(90,22,172,.05);
+}
+
+/* ============================================================
+   ESTÉTICA 1 · ARCADE 8-BIT
+   pixel no chrome, cores vivas, sombras "hard"
+   ============================================================ */
+.arcade .app{background:
+  linear-gradient(#fff,#fff) padding-box,
+  repeating-linear-gradient(0deg, rgba(90,22,172,.04) 0 2px, transparent 2px 4px);
+}
+.arcade .app-name,
+.arcade .app .pbig,.arcade .app .prank,.arcade .app .punit,
+.arcade .app .chip,.arcade .app .you .rk,.arcade .app .you .valn,.arcade .app .you .youtag,
+.arcade .app .selo .lab,.arcade .app .pname{
+  font-family:'Press Start 2P',monospace;
+}
+.arcade .topbar{background:linear-gradient(180deg,var(--p),var(--pdark));border-bottom:4px solid var(--ink);padding-bottom:14px}
+.arcade .brand .logo{border-radius:0;box-shadow:2px 2px 0 var(--ink)}
+.arcade .app-name{color:var(--gold2);font-size:11px;line-height:1.5;text-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.arcade .week{color:#E4D8FA}
+.arcade .chip{
+  border:3px solid var(--ink);border-radius:0;font-size:8px;line-height:1.6;padding:8px 9px;
+  box-shadow:3px 3px 0 rgba(90,22,172,.25);
+}
+.arcade .chip.on{background:var(--p);color:var(--gold2);box-shadow:3px 3px 0 var(--ink)}
+.arcade .selo{border-radius:0;border:3px solid var(--goldD);box-shadow:3px 3px 0 rgba(150,112,28,.25)}
+.arcade .selo .lab{font-size:7px;line-height:1.6}
+.arcade .avatar{border-radius:0;border:3px solid var(--ink);box-shadow:3px 3px 0 rgba(0,0,0,.18)}
+.arcade .fdot{border-radius:0;box-shadow:0 0 0 2px var(--ink)}
+.arcade .crown{filter:none}
+.arcade .pedestal{border-radius:0;border:3px solid var(--ink);box-shadow:4px 4px 0 rgba(0,0,0,.18)}
+.arcade .pcol.first .pedestal{border-color:var(--goldD)}
+.arcade .pbig{font-size:15px}
+.arcade .pcol.first .pbig{font-size:18px}
+.arcade .punit{font-size:6px;line-height:1.6}
+.arcade .prank{font-size:7px}
+.arcade .pname{font-size:7.5px;line-height:1.5}
+.arcade .you{border-radius:0;border:3px solid var(--p);box-shadow:4px 4px 0 rgba(90,22,172,.25)}
+.arcade .you .av{border-radius:0;border:3px solid var(--ink)}
+.arcade .you .rk{font-size:11px}
+.arcade .you .valn{font-size:13px}
+.arcade .you .youtag{font-size:8px}
+.arcade .more{border-radius:0;border:2px dashed rgba(90,22,172,.4)}
+
+/* ============================================================
+   ESTÉTICA 2 · CLAYMORPHISM
+   massinha 3D, tudo arredondado, sombras macias + luz interna
+   ============================================================ */
+.clay .app{background:linear-gradient(180deg,#F3ECFC,#ECE2FA)}
+.clay .topbar{padding-top:26px}
+.clay .app-name{color:var(--p);font-weight:900}
+.clay .brand .logo{
+  width:26px;height:26px;border-radius:10px;
+  box-shadow:3px 3px 7px rgba(74,26,140,.35), -2px -2px 6px rgba(255,255,255,.9);
+}
+.clay .chips{padding-top:6px}
+.clay .chip{
+  border:none;border-radius:16px;background:#EDE3FB;color:var(--p);font-weight:800;padding:10px 14px;
+  box-shadow:4px 4px 9px rgba(74,26,140,.20), -4px -4px 9px rgba(255,255,255,.95);
+}
+.clay .chip.on{
+  color:#fff;background:linear-gradient(145deg,var(--pl),var(--pm));
+  box-shadow: inset 3px 3px 7px rgba(58,16,110,.55), inset -3px -3px 7px rgba(190,150,240,.55);
+}
+.clay .selo{
+  border:none;border-radius:18px;
+  background:linear-gradient(145deg,#FBF2DC,#F3E4BE);
+  box-shadow:5px 5px 12px rgba(150,112,28,.25), -4px -4px 10px rgba(255,255,255,.9);
+}
+.clay .avatar{
+  border:none;box-shadow:5px 5px 11px rgba(74,26,140,.30), -3px -3px 8px rgba(255,255,255,.85), inset 2px 2px 4px rgba(255,255,255,.4);
+}
+.clay .crown{filter:drop-shadow(0 3px 3px rgba(150,112,28,.4))}
+.clay .pedestal{
+  border-radius:22px;
+  box-shadow:6px 8px 16px rgba(74,26,140,.28), -4px -4px 10px rgba(255,255,255,.6), inset 3px 3px 6px rgba(255,255,255,.28), inset -3px -3px 8px rgba(48,12,96,.35);
+  background:linear-gradient(155deg,var(--pl),var(--pm));
+}
+.clay .pcol.first .pedestal{
+  background:linear-gradient(155deg,var(--gold2),var(--gold));
+  box-shadow:6px 8px 16px rgba(150,112,28,.30), -4px -4px 10px rgba(255,255,255,.7), inset 3px 3px 6px rgba(255,255,255,.5), inset -3px -3px 8px rgba(120,88,20,.4);
+}
+.clay .fdot{box-shadow:2px 2px 3px rgba(0,0,0,.18), inset 1px 1px 2px rgba(255,255,255,.5)}
+.clay .you{
+  border:none;border-radius:24px;background:linear-gradient(145deg,#F0E6FC,#E7D8FA);
+  box-shadow:6px 6px 15px rgba(74,26,140,.22), -5px -5px 12px rgba(255,255,255,.9);
+}
+.clay .you .av{
+  box-shadow:4px 4px 9px rgba(74,26,140,.35), -2px -2px 6px rgba(255,255,255,.6);
+}
+.clay .more{
+  border-radius:16px;background:#EDE3FB;color:var(--pm);font-weight:700;
+  box-shadow: inset 3px 3px 7px rgba(74,26,140,.14), inset -3px -3px 7px rgba(255,255,255,.9);
+}
+.clay .nav .plus{border-radius:16px;box-shadow:4px 4px 10px rgba(74,26,140,.4), -2px -2px 6px rgba(255,255,255,.3)}
+
+/* ============================================================
+   ESTÉTICA 3 · MINIMALISM
+   muito espaço, hairlines, roxo com parcimônia, elegante
+   ============================================================ */
+.min .app{background:#fff;letter-spacing:.01em}
+.min .topbar{padding:26px 20px 14px}
+.min .app-name{font-weight:700;letter-spacing:.06em;font-size:12px;text-transform:uppercase;color:var(--ink)}
+.min .brand .logo{width:16px;height:16px;border-radius:5px;background:var(--p)}
+.min .week{font-size:10.5px;letter-spacing:.04em}
+.min .chips{padding:2px 18px 14px;gap:18px}
+.min .chip{
+  border:none;background:none;border-radius:0;padding:8px 0;color:var(--muted);font-weight:600;font-size:12px;
+  border-bottom:2px solid transparent;
+}
+.min .chip.on{background:none;color:var(--ink);border-bottom-color:var(--p)}
+.min .selo{
+  margin:0 20px 18px;background:none;border:none;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  border-radius:0;padding:11px 0;color:var(--bodytext);
+}
+.min .selo .ico{display:none}
+.min .selo .lab{color:var(--muted);font-size:9.5px;letter-spacing:.14em}
+.min .selo .who{color:var(--ink);font-weight:700}
+.min .podium{padding:8px 20px 16px;gap:14px}
+.min .avatar{border:none;box-shadow:none;background-clip:padding-box}
+.min .pcol.first .avatar{box-shadow:0 0 0 2px var(--gold)}
+.min .crown{display:none}
+.min .pcol.first .prank::before{content:"1";}
+.min .pedestal{
+  background:none;color:var(--ink);height:auto !important;padding:2px 0 0;border-radius:0;
+}
+.min .pbig{font-size:24px;font-weight:800;color:var(--ink)}
+.min .pcol.first .pbig{font-size:30px;color:var(--p)}
+.min .punit{color:var(--muted);opacity:1;font-weight:600;letter-spacing:.08em}
+.min .prank{color:var(--muted);opacity:1}
+.min .pname{font-weight:700}
+.min .you{
+  margin:0 20px 16px;background:none;border:none;border-top:1px solid var(--hair);
+  border-radius:0;padding:16px 0 4px;
+}
+.min .you .av{box-shadow:none;border:none;background:var(--p)}
+.min .you .rk{color:var(--ink)}
+.min .you .youtag{color:var(--p);font-weight:800}
+.min .you .valn{color:var(--ink)}
+.min .more{background:none;color:var(--muted);padding:8px 0 0;font-weight:500}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.foot{
+  max-width:640px;margin:52px auto 0;text-align:center;
+  font-size:13.5px;line-height:1.65;color:var(--h-muted);
+}
+.foot b{color:var(--h-body)}
+
+/* ============================================================
+   ENTRADA
+   ============================================================ */
+.col{opacity:0;transform:translateY(16px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+.col:nth-child(1){animation-delay:.05s}
+.col:nth-child(2){animation-delay:.15s}
+.col:nth-child(3){animation-delay:.25s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .col{animation:none;opacity:1;transform:none}
+  *{transition:none !important}
+}
+
+@media (max-width:760px){
+  .master .lbl{width:100%;text-align:center;margin:0 0 4px}
+}
+</style>
+
+<header class="head">
+  <p class="eyebrow">Estudo de Estética</p>
+  <h1>App Mentoria <span class="em">Tóca De Ouvido</span></h1>
+  <p class="lede">A mesma tela (o Placar) em 3 caminhos visuais. Toque nos chips, compare, e me diz qual te chama.</p>
+  <p class="note">Todos partem da mesma marca (branco, roxo, dourado). Dá pra cruzar depois, tipo "claymorphism com alma de arcade".</p>
+
+  <div class="master" role="tablist" aria-label="Qual placar mostrar">
+    <span class="lbl">Você está vendo</span>
+    <button class="mtab" role="tab" data-tab="musicas" aria-selected="true">Músicas da Semana</button>
+    <button class="mtab" role="tab" data-tab="faixas" aria-selected="false">Mural das Faixas</button>
+    <button class="mtab" role="tab" data-tab="estudos" aria-selected="false">Estudos da Semana</button>
+  </div>
+</header>
+
+<main class="stage">
+  <!-- ARCADE -->
+  <section class="col">
+    <div class="col-head"><span class="k">01 · <b>Arcade 8-bit</b></span></div>
+    <div class="phone">
+      <div class="screen arcade" data-phone="arcade">
+        <div class="app"></div>
+        <nav class="nav">
+          <div class="ni on"><span class="dot"></span>Placar</div>
+          <div class="ni"><span class="dot"></span>Mural</div>
+          <div class="plus">+</div>
+          <div class="ni"><span class="dot"></span>Perfil</div>
+        </nav>
+      </div>
+    </div>
+    <div class="caption">
+      <b>Energia de fliperama.</b> Cores vivas, fonte pixel, sombras "hard". Fala direto com o "joguinho antigo".
+      <span class="warn">Ponto de atenção: pixel cansa em texto longo, por isso ele fica só nos números e títulos.</span>
+    </div>
+  </section>
+
+  <!-- CLAY -->
+  <section class="col">
+    <div class="col-head"><span class="k">02 · <b>Claymorphism</b></span></div>
+    <div class="phone">
+      <div class="screen clay" data-phone="clay">
+        <div class="app"></div>
+        <nav class="nav">
+          <div class="ni on"><span class="dot"></span>Placar</div>
+          <div class="ni"><span class="dot"></span>Mural</div>
+          <div class="plus">+</div>
+          <div class="ni"><span class="dot"></span>Perfil</div>
+        </nav>
+      </div>
+    </div>
+    <div class="caption">
+      <b>Fofo e tátil, feito de massinha.</b> Botões que parecem que dá pra apertar, sombras macias, clima acolhedor.
+      <span class="warn">Ponto de atenção: sombra pesada pode deixar a tela cheia no celular, precisa de equilíbrio.</span>
+    </div>
+  </section>
+
+  <!-- MINIMAL -->
+  <section class="col">
+    <div class="col-head"><span class="k">03 · <b>Minimalism</b></span></div>
+    <div class="phone">
+      <div class="screen min" data-phone="min">
+        <div class="app"></div>
+        <nav class="nav">
+          <div class="ni on"><span class="dot"></span>Placar</div>
+          <div class="ni"><span class="dot"></span>Mural</div>
+          <div class="plus">+</div>
+          <div class="ni"><span class="dot"></span>Perfil</div>
+        </nav>
+      </div>
+    </div>
+    <div class="caption">
+      <b>Limpo e elegante, muito espaço pra respirar.</b> Passa "premium" e não cansa a vista.
+      <span class="warn">Ponto de atenção: pode ficar sério demais pra um app de jogo, aí o lúdico vem da animação.</span>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  Feito pra você bater o olho e escolher. Quando decidir, eu aplico a estética vencedora no app inteiro.
+  <br><b>Se tiver referência (print de um app ou site que você acha lindo), manda. Referência é o que mais acelera.</b>
+</footer>
+
+<script>
+/* ===== dados (apelidos e cenas realistas da turma) ===== */
+var FAIXA = {branca:'var(--fa-branca)',azul:'var(--fa-azul)',verde:'var(--fa-verde)',marrom:'var(--fa-marrom)',preta:'var(--fa-preta)'};
+var AVCOL = {
+  'Val Cordas':'#E0662B','Deka':'#2E9E68','Tião Sena':'#3B7DD8',
+  'Mestre Rui':'#241539','Irmão Val':'#9C6B3A','Juninho PB':'#C9A050','Cléber':'#7B35D4'
+};
+function initials(n){
+  var p=n.split(' ');
+  return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();
+}
+
+var DATA = {
+  musicas:{
+    caption:'músicas',
+    podium:[
+      {nome:'Deka',faixa:'azul',n:'7',rank:'2º'},
+      {nome:'Val Cordas',faixa:'verde',n:'9',rank:'1º'},
+      {nome:'Tião Sena',faixa:'azul',n:'6',rank:'3º'}
+    ],
+    selo:{ico:'🌟',lab:'Estreante da Semana',who:'Juninho PB'},
+    you:{rk:'7º',faixa:'azul',valn:'4',vall:'músicas',delta:'subiu 2 posições',sub:'+3 vs semana passada'},
+    more:'e mais 22 alunos tirando música essa semana'
+  },
+  faixas:{
+    caption:'no total',
+    podium:[
+      {nome:'Val Cordas',faixa:'marrom',n:'24',rank:'2º · Marrom 2º'},
+      {nome:'Mestre Rui',faixa:'preta',n:'34',rank:'1º · Preta 1º'},
+      {nome:'Deka',faixa:'marrom',n:'13',rank:'3º · Marrom 1º'}
+    ],
+    selo:{ico:'🥋',lab:'Subiu de faixa essa semana',who:'Cléber, Azul 2º'},
+    you:{rk:'12º',faixa:'verde',valn:'8',vall:'no total',delta:'Verde 1º',sub:'falta 1 música pra Verde 2º'},
+    more:'e mais 22 alunos na escada das faixas'
+  },
+  estudos:{
+    caption:'estudando',
+    podium:[
+      {nome:'Val Cordas',faixa:'verde',n:'3h50',rank:'2º'},
+      {nome:'Deka',faixa:'azul',n:'4h20',rank:'1º'},
+      {nome:'Irmão Val',faixa:'azul',n:'3h10',rank:'3º'}
+    ],
+    selo:{ico:'🔥',lab:'Voltou com Tudo',who:'Cléber'},
+    you:{rk:'5º',faixa:'azul',valn:'2h05',vall:'estudando',delta:'+40 min vs semana passada',sub:'seu melhor mês até agora'},
+    more:'e mais 22 alunos estudando com o app essa semana'
+  }
+};
+
+var CHIPS=[['musicas','Músicas da Semana'],['faixas','Mural das Faixas'],['estudos','Estudos']];
+
+function avatar(nome,cls){
+  var c=AVCOL[nome]||'#7B35D4';
+  return '<div class="avatar '+(cls||'')+'" style="background:'+c+'">'+initials(nome)+'</div>';
+}
+function podiumCol(p,pos){
+  var posClass = pos===1?'first':(pos===0?'second':'third');
+  var crown = pos===1?'<span class="crown">👑</span>':'';
+  return '<div class="pcol '+posClass+'">'
+    + '<div style="position:relative">'+crown+avatar(p.nome)+'</div>'
+    + '<div class="pname">'+p.nome+'</div>'
+    + '<div class="pfaixa"><span class="fdot" style="background:'+FAIXA[p.faixa]+'"></span>'+cap(p.faixa)+'</div>'
+    + '<div class="pedestal"><span class="prank">'+p.rank+'</span><span class="pbig">'+p.n+'</span></div>'
+    + '</div>';
+}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+
+function screenHTML(tab){
+  var d=DATA[tab];
+  var chips = CHIPS.map(function(c){
+    return '<button class="chip'+(c[0]===tab?' on':'')+'" data-tab="'+c[0]+'">'+c[1]+'</button>';
+  }).join('');
+  // pódio na ordem visual: 2º, 1º, 3º
+  var pod = podiumCol(d.podium[0],0)+podiumCol(d.podium[1],1)+podiumCol(d.podium[2],2);
+  return ''
+    + '<div class="topbar"><div class="brand"><span class="logo"></span><span class="app-name">Tóca De Ouvido</span></div>'
+    +   '<span class="week">Semana de 21 a 27 jul</span></div>'
+    + '<div class="chips">'+chips+'</div>'
+    + '<div class="selo"><span class="ico">'+d.selo.ico+'</span><span class="lab">'+d.selo.lab+'</span><span class="who">'+d.selo.who+'</span></div>'
+    + '<div class="podium">'+pod+'</div>'
+    + '<div class="you">'
+    +   '<span class="rk">'+d.you.rk+'</span>'
+    +   avatar('Você','av')
+    +   '<div class="mid"><span class="youtag">VOCÊ <span class="fdot" style="background:'+FAIXA[d.you.faixa]+'"></span></span>'
+    +     '<span class="delta">'+d.you.delta+'</span><span class="sub">'+d.you.sub+'</span></div>'
+    +   '<div class="val"><div class="valn">'+d.you.valn+'</div><div class="vall">'+d.you.vall+'</div></div>'
+    + '</div>'
+    + '<div class="more">'+d.more+'</div>';
+}
+
+// avatar "Você" usa iniciais V
+AVCOL['Você']='#5A16AC';
+
+var state='musicas';
+function render(){
+  var apps=document.querySelectorAll('.app');
+  for(var i=0;i<apps.length;i++){ apps[i].innerHTML=screenHTML(state); }
+  var mt=document.querySelectorAll('.mtab');
+  for(var j=0;j<mt.length;j++){ mt[j].setAttribute('aria-selected', mt[j].getAttribute('data-tab')===state?'true':'false'); }
+}
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-tab]');
+  if(!t) return;
+  var tab=t.getAttribute('data-tab');
+  if(tab && DATA[tab]){ state=tab; render(); }
+});
+render();
+</script>
+</body>
+</html>
