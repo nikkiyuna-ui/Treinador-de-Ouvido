@@ -163,6 +163,14 @@ body{
 .nib.plus{margin-bottom:2px}
 .nib .plusbtn{width:50px;height:50px;border-radius:16px;background:linear-gradient(180deg,var(--pm),var(--p));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 22px -8px rgba(90,22,172,.8);margin-top:-18px}
 .nib:focus-visible{outline:2px solid var(--pl);outline-offset:2px;border-radius:8px}
+.nib .ic{width:28px;height:26px}
+/* ícones ricos: só o ativo aparece colorido; os demais ficam quietos (minimalismo) */
+.nib:not(.on) .pixi{filter:grayscale(1);opacity:.4}
+.rbtn:not(.on) .pixi{opacity:.92}
+.rbtn.on{transform:none}
+.champ .crownwrap{display:flex;justify-content:center;line-height:0}
+.selo .pixi{flex:0 0 auto}
+.medal .pixi,.mlist .pixi{flex:0 0 auto}
 
 /* ---------- folha Registrar ---------- */
 .sheet{position:absolute;inset:0;z-index:20;display:none;flex-direction:column;background:rgba(20,8,40,.28);backdrop-filter:blur(2px)}
@@ -243,134 +251,74 @@ body{
 </footer>
 
 <script>
-/* =================== ícones pixel-art (arte original) =================== */
-function pix(rows,map,px){
+/* =================== ícones pixel-art 16-bit (arte original, contorno + sombreado) =================== */
+var PMAP={
+ K:'#140f18',
+ G:'#9a6f16',H:'#e0a81e',J:'#ffd85e',L:'#fff3c4',
+ R:'#a01228',r:'#e23145',o:'#ff707e',W:'#ffffff',
+ F:'#d8431a',f:'#ff8a2a',
+ B:'#2170a0',b:'#54bfe8',c:'#b4ecff',
+ S:'#69707c',s:'#a7afbb',t:'#e4e9f0',
+ N:'#6b431f',n:'#9c6b3a',u:'#caa06a',
+ x:'#1f7a3f',v:'#37b25a',y:'#8ff0a0',
+ P:'#5A16AC',p:'#a070e8'
+};
+var G={gold:'#C9A050',goldD:'#96701C',gold2:'#E8CB86',p:'#5A16AC',pl:'#A070E8',ink:'#241539',red:'#D6455B',muted:'#8B7FAB',verde:'#2E9E68',azul:'#3B7DD8'};
+function pix(rows,px){
   px=px||3;var w=rows[0].length,h=rows.length,r='';
   for(var y=0;y<h;y++)for(var x=0;x<w;x++){
     var ch=rows[y][x];if(ch==='.'||ch===' ')continue;
-    r+='<rect x="'+(x*px)+'" y="'+(y*px)+'" width="'+px+'" height="'+px+'" fill="'+(map[ch]||'#000')+'"/>';
+    r+='<rect x="'+(x*px)+'" y="'+(y*px)+'" width="'+px+'" height="'+px+'" fill="'+(PMAP[ch]||'#f0f')+'"/>';
   }
   return '<svg class="pixi" width="'+(w*px)+'" height="'+(h*px)+'" viewBox="0 0 '+(w*px)+' '+(h*px)+'" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">'+r+'</svg>';
 }
-var G={gold:'#C9A050',goldD:'#96701C',gold2:'#E8CB86',p:'#5A16AC',pl:'#A070E8',ink:'#241539',red:'#D6455B',muted:'#8B7FAB',verde:'#2E9E68',azul:'#3B7DD8'};
-
 var ICON={
+ trophy:[
+  "..KKKKKKKKKK..",".KLJJJJJJJJGK.","KGJJJJJJJJJHGK","KGKHHHHHHHHKGK",
+  "KGKHHHHHHHHKGK","KGKHHHHHHHHKGK",".KKHHHHHHHHKK.","..KHHHHHHHHK..",
+  "..KGHHHHHHGK..","...KGHHHHGK...","....KHHHHK....",".....KHHK.....",
+  ".....KHHK.....","...KKKJJKKK...","...KLLLLLLK...","..KKKKKKKKKK.."],
  crown:[
-  "#...#...#",
-  "#...#...#",
-  "#.#.#.#.#",
-  "#########",
-  "#########",
-  ".#######.",
-  ".DDDDDDD."],
+  "..K...K...K..",".KJK.KLK.KJK.",".KHK.KJK.KHK.","KHHKKJJJKKHHK",
+  "KHrHHHWHHHrHK","KHHHHHHHHHHHK","KGHHHHHHHHHGK","KKKKKKKKKKKKK"],
+ coin:[
+  "...KKKKK...",".KKLJJHGKK.",".KLJJHHHGK.","KLJJHHHHGGK","KJJHHHHHGGK",
+  "KJHHHHHHGGK","KJHHHHHGGGK","KLJHHHHGGGK",".KGHHHGGGK.",".KKGGGGGKK.","...KKKKK..."],
  star:[
-  "....#....",
-  "....#....",
-  "...###...",
-  "#########",
-  ".#######.",
-  "..#####..",
-  "..#####..",
-  ".##...##.",
-  ".#.....#."],
- flame:[
-  "...#...",
-  "..##...",
-  "..###..",
-  ".####..",
-  ".#####.",
-  "######.",
-  "#######",
-  "#######",
-  ".#####.",
-  "..###.."],
+  "......K......",".....KLK.....",".....KJK.....","....KJJJK....","KKKKKJJJKKKKK",
+  ".KLJJJJJJJHK.","..KJJJJJJJK..","...KJJJJJK...","...KJJJJJK...","..KJJKKJJHK..",
+  ".KJJK..KJHK..",".KHK....KGK.."],
  heart:[
-  ".##...##.",
-  "#########",
-  "#########",
-  "#########",
-  ".#######.",
-  "..#####..",
-  "...###...",
-  "....#...."],
+  ".KKKKK.KKKKK.","KWWrrrKrrrroK","KWrrrrrrrrroK","KrrrrrrrrrroK","KrrrrrrrrrroK",
+  ".KrrrrrrrroK.",".KrrrrrrrroK.","..KrrrrrroK..","...KrrrroK...","....KrroK....",
+  ".....KoK.....","......K......"],
+ flame:[
+  "....K....","...KfK...","..KFfK...","..KFfK...",".KFfJfK..",".KFJJJfK.",
+  "KFFJLJffK","KFFJJJffK","KFFfJfffK",".KFfffFK.","..KFFFK..","...KKK..."],
  note:[
-  ".....##.",
-  ".....##.",
-  ".....##.",
-  ".....##.",
-  ".##..##.",
-  "####.##.",
-  "####.##.",
-  ".##....."],
+  "......KK.",".....KppK",".....KPPK",".....KPK.",".....KPK.",".KKK.KPK.",
+  "KppKKKPK.","KPPPKKKK.","KPPPPK...","KPPPPK...",".KKKK...."],
  medal:[
-  "RR.....RR",
-  "RR.....RR",
-  "RR.....RR",
-  ".GGGGGGG.",
-  "GGGGGGGGG",
-  "GGGG.GGGG",
-  "GGG...GGG",
-  "GGGG.GGGG",
-  ".GGGGGGG."],
+  "KsK.....KsK","KsK.....KsK","KtK.....KtK",".KKKKKKKKK.",".KJHHGHHJK.","KLJHGGGHJGK",
+  "KJHGGGGGHGK","KJHHGGGHHGK","KLJHGHGHGGK",".KGHHHHHGGK.","..KKKKKKK.."],
+ diamond:[
+  ".KKKKKKK.","KcbBcbBBK",".KcbbbBK.","..KcbBK..","...KbK...","....K...."],
+ sword:[
+  "......KK",".....KtK","....KtsK","...KtsK.","..KtsK..",".KtsK...","KKKKKK..",".KnK.KK.","KnnnK...",".KnK...."],
  lock:[
-  "..###..",
-  ".#...#.",
-  ".#...#.",
-  "#######",
-  "#######",
-  "##...##",
-  "#######"],
+  "..KKKKK..",".KsttsK..",".KsKKKsK.",".KsK.KsK.","KKKKKKKKK","KSttttSK.","KStKKtSK.","KStKKtSK.","KSttttSK.","KKKKKKKK."],
  play:[
-  "#....",
-  "##...",
-  "###..",
-  "####.",
-  "#####",
-  "####.",
-  "###..",
-  "##...",
-  "#...."],
+  "KPK.....","KPpK....","KPppK...","KPpppK..","KPppppK.","KPpppK..","KPppK...","KPpK....","KPK....."],
  metro:[
-  "...#...",
-  "...#...",
-  "..#.#..",
-  "..#.#..",
-  ".#.#.#.",
-  ".#.#.#.",
-  "#######",
-  "#######"],
- belt:[
-  ".........",
-  "#########",
-  "#..###..#",
-  "#.#GGG#.#",
-  "#..###..#",
-  "#########",
-  "........."],
+  "...KKK...","..KpLPK..","..KPKPK..",".KPPKPPK.",".KPPKPPK.","KPPPKPPPK","KPPPKPPPK","KKKKKKKKK"],
  check:[
-  ".......#",
-  "......##",
-  "#....###",
-  "##..###.",
-  "###.##..",
-  ".####...",
-  "..##...."],
- guitar:[
-  "......##",
-  ".....##.",
-  "..#.##..",
-  ".###....",
-  "####....",
-  "####....",
-  ".###...."]
+  ".......K","......KK","K....KvK","KK..KvvK","KyKKvvK.",".KyvvK..","..KKK..."]
 };
-function ic(name,color,px){
-  var map;
-  if(name==='crown')map={'#':color||G.gold,'D':G.goldD};
-  else if(name==='medal')map={'G':G.gold,'R':G.p};
-  else if(name==='belt')map={'#':G.ink,'G':G.gold};
-  else map={'#':color||G.ink};
-  return pix(ICON[name],map,px||3);
+/* ic(name) rico. Aceita ainda o formato antigo ic(name,cor,px): a cor é ignorada
+   (os ícones já têm suas próprias cores) e o px é detectado em qualquer posição. */
+function ic(name,a,b){
+  var px=(typeof b==='number')?b:((typeof a==='number')?a:3);
+  return pix(ICON[name]||ICON.star,px);
 }
 
 /* =================== dados =================== */
@@ -420,7 +368,7 @@ function screenPlacar(){
    '<div class="top"><span class="ttl">Placar</span><span class="sub">Semana de 21 a 27 jul</span></div>'+
    '<div class="subtabs">'+subtabs+'</div><div class="hr"></div>'+
    '<div class="selo">'+ic(d.selo.ico,G.gold,3)+'<span class="lab">'+d.selo.lab+'</span><span class="who">'+d.selo.who+'</span></div>'+
-   '<div class="champ"><div class="crownwrap">'+ic('crown',G.gold,4)+'</div>'+
+   '<div class="champ"><div class="crownwrap">'+(placarTab==='faixas'?ic('crown',4):ic('trophy',3))+'</div>'+
      avatar(d.champ.nome,58)+'<div class="who">'+d.champ.nome+'</div>'+
      '<div class="fa">'+dot(d.champ.faixa)+cap(d.champ.faixa)+'</div>'+
      '<div class="big px">'+d.champ.n+'</div><div class="cap">'+d.champ.cap+'</div></div>'+
@@ -461,7 +409,7 @@ function screenMural(){
    // post faixa
    '<div class="post faixaup"><div class="ph">'+avatar('Cléber',40)+
      '<div class="nm"><b>Cléber</b><span>subiu de faixa</span></div><span class="when">ontem</span></div>'+
-     '<div class="body">'+ic('belt',null,4)+'<span><b>Subiu pra Azul 2º.</b> Já são 4 músicas de ouvido.</span></div>'+
+     '<div class="body">'+ic('medal',4)+'<span><b>Subiu pra Azul 2º.</b> Já são 4 músicas de ouvido.</span></div>'+
      reactBtns('p3')+'</div>';
 }
 
@@ -472,7 +420,7 @@ var MEDALS=[
  {n:'Trocou o tom sem cifra',ico:'star',on:false},
  {n:'Campo harmônico aplicado',ico:'check',on:false},
  {n:'10 músicas de ouvido',ico:'medal',on:false},
- {n:'Solo improvisado',ico:'guitar',on:false}
+ {n:'Solo improvisado',ico:'sword',on:false}
 ];
 function screenPerfil(){
   var med=MEDALS.map(function(m){
