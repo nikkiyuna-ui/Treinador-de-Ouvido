@@ -1,0 +1,83 @@
+name: drive-relay
+on:
+  workflow_dispatch: {}
+  push:
+    branches: ["claude/endocrinovet-aulas-divisao-43b6yv"]
+    paths: [".github/relay-trigger"]
+permissions:
+  contents: write
+concurrency:
+  group: drive-relay
+  cancel-in-progress: false
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: free disk
+        run: |
+          sudo rm -rf /usr/local/lib/android /opt/hostedtoolcache/CodeQL /usr/local/.ghcup /usr/share/dotnet 2>/dev/null || true
+          df -h /
+      - name: relay
+        shell: bash
+        run: |
+          set -u
+          pip install -q gdown huggingface_hub
+          TAG="relay-${GITHUB_RUN_ID}"
+          RID=$(gh api "repos/${GITHUB_REPOSITORY}/releases" -f tag_name="$TAG" -f name="relay $TAG" -F draft=true --jq .id)
+          echo "RELEASE_ID=$RID"
+          up() {
+            local f="$1"
+            echo "upload: $f ($(stat -c%s "$f") bytes)"
+            curl -sS --fail-with-body -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"$f" \
+              "https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RID}/assets?name=$(basename "$f")" \
+              -o /dev/null
+          }
+          # 1) whisper model first so the container can prepare while videos transfer
+          python3 - <<'PY'
+          from huggingface_hub import snapshot_download
+          snapshot_download("Systran/faster-whisper-small", local_dir="whisper-small")
+          PY
+          tar czf whisper-small.tar.gz whisper-small
+          up whisper-small.tar.gz && rm -rf whisper-small whisper-small.tar.gz
+          # 2) videos, chunked below the 2GB asset limit
+          mkdir -p work
+          touch manifest.txt
+          relay_one() {
+            local id="$1" name="$2" size="$3"
+            cd work
+            echo "== $name expect $size bytes =="
+            curl -sL "https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t" | split -b 1900M - "${name}.part_" || true
+            local total
+            total=$(du -cb ${name}.part_* 2>/dev/null | tail -1 | cut -f1); total=${total:-0}
+            echo "curl-pipe bytes: $total"
+            if [ "$total" != "$size" ]; then
+              echo "curl-pipe failed, falling back to gdown"
+              rm -f ${name}.part_*
+              python3 -m gdown "https://drive.google.com/uc?id=${id}" -O "${name}.mp4" || true
+              [ -f "${name}.mp4" ] || python3 -m gdown --fuzzy "https://drive.google.com/file/d/${id}/view" -O "${name}.mp4" || true
+              [ -f "${name}.mp4" ] || { echo "FATAL: download failed for $name"; exit 1; }
+              split -b 1900M "${name}.mp4" "${name}.part_"
+              rm -f "${name}.mp4"
+              total=$(du -cb ${name}.part_* | tail -1 | cut -f1)
+              echo "gdown bytes: $total"
+              [ "$total" = "$size" ] || { echo "FATAL: size mismatch for $name: got $total"; exit 1; }
+            fi
+            sha256sum ${name}.part_* >> ../manifest.txt
+            local p
+            for p in ${name}.part_*; do
+              up "$p" || { echo "FATAL: upload failed for $p"; exit 1; }
+              rm -f "$p"
+            done
+            cd ..
+          }
+          relay_one "1H_4YzRxRvKBW3zgcpLj4ivn42RSFERn_" "manha" "7277074967"
+          relay_one "1YTYbApL5WUEfNm3laf8kgkMyYtd22TJJ" "tarde" "4933517543"
+          # 3) manifest last = completion marker
+          up manifest.txt
+          echo "RELAY-DONE"
