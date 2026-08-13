@@ -34,7 +34,7 @@ jobs:
             curl -sS --fail-with-body -X POST \
               -H "Authorization: Bearer ${GH_TOKEN}" \
               -H "Content-Type: application/octet-stream" \
-              --data-binary @"$f" \
+              -T "$f" \
               "https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/${RID}/assets?name=$(basename "$f")" \
               -o /dev/null
           }
