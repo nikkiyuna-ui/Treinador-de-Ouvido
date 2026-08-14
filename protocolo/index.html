@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo Endocrinovet — Endocrinologia Veterinária na Prática</title>
+<meta name="description" content="O passo a passo para identificar e tratar as endocrinopatias com total confiança — mesmo que você ache que endócrino é complicado. Com a Dra. Alessandra Vargas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07211d;
+    --bg-2:#0a2b26;
+    --bg-3:#0e352f;
+    --card:#0d312b;
+    --line:rgba(212,175,55,.18);
+    --gold:#d4af37;
+    --gold-2:#e8c95c;
+    --cream:#f4efe3;
+    --muted:#b8c7c0;
+    --danger:#e2604f;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:var(--sans);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  .narrow{max-width:820px;margin:0 auto}
+  section{padding:76px 0}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.18}
+  h2{font-size:clamp(28px,4.2vw,40px);margin-bottom:18px}
+  .kicker{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .lead{color:var(--muted);font-size:clamp(17px,2.2vw,19px)}
+  .gold{color:var(--gold)}
+  .center{text-align:center}
+
+  /* ---------- CTA button ---------- */
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#1d1503;font-weight:800;font-family:var(--sans);font-size:17px;letter-spacing:.02em;text-decoration:none;padding:19px 42px;border-radius:999px;box-shadow:0 10px 30px rgba(212,175,55,.28), inset 0 1px 0 rgba(255,255,255,.5);transition:transform .15s ease,box-shadow .15s ease;text-align:center}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(212,175,55,.4), inset 0 1px 0 rgba(255,255,255,.5)}
+  .btn small{display:block;font-size:12px;font-weight:600;letter-spacing:.05em;opacity:.75;margin-top:3px}
+  .btn-note{font-size:13.5px;color:var(--muted);margin-top:14px}
+
+  /* ---------- topbar ---------- */
+  .topbar{padding:18px 0;border-bottom:1px solid var(--line);background:rgba(7,33,29,.92);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.02em}
+  .logo span{color:var(--gold)}
+  .topbar .btn{padding:11px 24px;font-size:14px;box-shadow:none}
+
+  /* ---------- hero ---------- */
+  .hero{padding:84px 0 90px;background:
+    radial-gradient(900px 480px at 70% -10%,rgba(212,175,55,.10),transparent 60%),
+    radial-gradient(700px 420px at 10% 110%,rgba(14,63,55,.9),transparent 60%),
+    var(--bg)}
+  .hero h1{font-size:clamp(32px,5.4vw,54px);max-width:900px;margin:0 auto 22px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .lead{max-width:760px;margin:0 auto 36px}
+  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;background:rgba(212,175,55,.06)}
+  .hero-meta{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:14.5px}
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .hero-meta b{color:var(--cream)}
+
+  /* ---------- video placeholder ---------- */
+  .vsl{margin:46px auto 0;max-width:760px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:16px;background:linear-gradient(160deg,var(--bg-3),var(--bg-2));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted)}
+  .vsl .play{width:74px;height:74px;border-radius:50%;background:linear-gradient(180deg,var(--gold-2),var(--gold));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,.35)}
+  .vsl .play svg{margin-left:5px}
+
+  /* ---------- pains ---------- */
+  .alt{background:var(--bg-2)}
+  .pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:38px}
+  .pain{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;font-size:16px;color:var(--muted)}
+  .pain b{color:var(--cream)}
+  .pain .x{color:var(--danger);font-weight:800;margin-right:10px;font-size:18px}
+
+  /* ---------- quote ---------- */
+  .bigquote{font-family:var(--serif);font-size:clamp(22px,3.4vw,30px);font-style:italic;line-height:1.45;color:var(--cream);border-left:3px solid var(--gold);padding-left:26px;margin:44px auto 0;max-width:780px}
+  .bigquote footer{font-family:var(--sans);font-style:normal;font-size:14.5px;color:var(--gold);margin-top:14px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+
+  /* ---------- CSI method ---------- */
+  .steps{counter-reset:step;display:grid;gap:14px;margin-top:42px}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 28px}
+  .step .num{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-family:var(--serif);font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,.06)}
+  .step h3{font-size:21px;margin-bottom:6px}
+  .step h3 span{color:var(--gold);font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:15.5px}
+
+  /* ---------- modules ---------- */
+  .modules{margin-top:42px;display:grid;gap:12px}
+  details.mod{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  details.mod summary{cursor:pointer;list-style:none;padding:22px 26px;display:flex;align-items:center;gap:18px;font-weight:600;font-size:17px}
+  details.mod summary::-webkit-details-marker{display:none}
+  details.mod summary .m-num{font-family:var(--serif);color:var(--gold);font-size:14px;font-weight:700;letter-spacing:.1em;white-space:nowrap;border:1px solid var(--line);border-radius:8px;padding:5px 12px;background:rgba(212,175,55,.05)}
+  details.mod summary .chev{margin-left:auto;color:var(--gold);transition:transform .2s;flex-shrink:0}
+  details.mod[open] summary .chev{transform:rotate(180deg)}
+  details.mod ul{padding:0 26px 24px 26px;list-style:none;display:grid;gap:10px}
+  details.mod li{color:var(--muted);font-size:15.5px;padding-left:26px;position:relative}
+  details.mod li::before{content:"▸";color:var(--gold);position:absolute;left:2px}
+  details.mod li b{color:var(--cream);font-weight:600}
+  .dur{color:var(--gold);font-size:13px;white-space:nowrap}
+  .course-stats{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .stat{border:1px solid var(--line);border-radius:12px;padding:16px 26px;text-align:center;background:var(--card)}
+  .stat b{display:block;font-family:var(--serif);font-size:26px;color:var(--gold)}
+  .stat span{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- testimonials ---------- */
+  .testis{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:40px}
+  .testi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px}
+  .testi .stars{color:var(--gold);letter-spacing:3px;font-size:15px}
+  .testi p{color:var(--muted);font-size:15.5px;font-style:italic}
+  .testi.hl{border-color:var(--gold);background:linear-gradient(160deg,rgba(212,175,55,.10),var(--card))}
+  .testi.hl p{color:var(--cream)}
+  .testi footer{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- bio ---------- */
+  .bio{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center;margin-top:20px}
+  .bio-photo{aspect-ratio:4/5;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,var(--bg-3),var(--bg-2));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-align:center;padding:20px}
+  .bio ul{list-style:none;display:grid;gap:12px;margin-top:22px}
+  .bio li{padding-left:30px;position:relative;color:var(--muted);font-size:16px}
+  .bio li::before{content:"✦";color:var(--gold);position:absolute;left:0}
+  .bio li b{color:var(--cream)}
+
+  /* ---------- for whom ---------- */
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px}
+  .who{border-radius:16px;padding:30px;border:1px solid var(--line)}
+  .who.yes{background:linear-gradient(160deg,rgba(212,175,55,.08),var(--card))}
+  .who.no{background:var(--card)}
+  .who h3{font-size:20px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .who ul{list-style:none;display:grid;gap:12px}
+  .who li{padding-left:28px;position:relative;color:var(--muted);font-size:15.5px}
+  .who.yes li::before{content:"✓";color:var(--gold);font-weight:800;position:absolute;left:0}
+  .who.no li::before{content:"✕";color:var(--danger);font-weight:800;position:absolute;left:0}
+
+  /* ---------- offer ---------- */
+  .offer{background:
+    radial-gradient(700px 400px at 50% 0%,rgba(212,175,55,.12),transparent 60%),
+    var(--bg-2)}
+  .offer-card{max-width:560px;margin:44px auto 0;background:var(--card);border:1.5px solid var(--gold);border-radius:22px;padding:46px 40px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+  .offer-card .prod{font-family:var(--serif);font-size:24px;margin-bottom:6px}
+  .offer-card .tagline{color:var(--muted);font-size:14.5px;margin-bottom:28px}
+  .offer-card ul{list-style:none;text-align:left;display:grid;gap:11px;margin:0 auto 30px;max-width:400px}
+  .offer-card li{padding-left:28px;position:relative;color:var(--muted);font-size:15px}
+  .offer-card li::before{content:"✓";color:var(--gold);font-weight:800;position:absolute;left:0}
+  .offer-card li b{color:var(--cream)}
+  .price-old{color:var(--muted);font-size:15px;text-decoration:line-through;opacity:.7}
+  .price{font-family:var(--serif);font-size:64px;font-weight:700;color:var(--gold);line-height:1;margin:8px 0 4px}
+  .price sup{font-size:24px;font-weight:600;vertical-align:38px;margin-right:4px}
+  .price-note{color:var(--muted);font-size:14px;margin-bottom:30px}
+
+  /* ---------- guarantee ---------- */
+  .guarantee{display:grid;grid-template-columns:120px 1fr;gap:34px;align-items:center;max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:38px 40px}
+  .seal{width:120px;height:120px;border-radius:50%;border:2px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);text-align:center;background:rgba(212,175,55,.06)}
+  .seal b{font-size:34px;line-height:1}
+  .seal span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--sans);font-weight:700;margin-top:4px}
+  .guarantee p{color:var(--muted);font-size:15.5px}
+  .guarantee h3{font-size:22px;margin-bottom:10px}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px;margin:40px auto 0;display:grid;gap:12px}
+  details.q{background:var(--card);border:1px solid var(--line);border-radius:14px}
+  details.q summary{cursor:pointer;list-style:none;padding:20px 26px;font-weight:600;font-size:16.5px;display:flex;align-items:center;gap:14px}
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary .chev{margin-left:auto;color:var(--gold);transition:transform .2s;flex-shrink:0}
+  details.q[open] summary .chev{transform:rotate(180deg)}
+  details.q p{padding:0 26px 22px;color:var(--muted);font-size:15.5px}
+
+  footer.site{border-top:1px solid var(--line);padding:44px 0;text-align:center;color:var(--muted);font-size:13px}
+  footer.site .logo{margin-bottom:14px}
+  footer.site p{max-width:700px;margin:0 auto 8px}
+
+  @media(max-width:820px){
+    section{padding:58px 0}
+    .bio{grid-template-columns:1fr;gap:30px}
+    .bio-photo{max-width:320px;margin:0 auto}
+    .cols2{grid-template-columns:1fr}
+    .guarantee{grid-template-columns:1fr;text-align:center;justify-items:center}
+    .step{grid-template-columns:1fr;gap:12px}
+    .topbar .btn{display:none}
+    .price{font-size:52px}
+    .offer-card{padding:36px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= TOPO ======================= -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo">Endocrino<span>vet</span></div>
+    <a class="btn" href="#oferta">Quero entrar agora</a>
+  </div>
+</div>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero center">
+  <div class="wrap">
+    <div class="badge">🔎 Método CSI da Alê · Casos clínicos reais</div>
+    <h1>O passo a passo para identificar e tratar as <em>endocrinopatias</em> com total confiança</h1>
+    <p class="lead">— mesmo que você ache que endócrino é complicado. Um curso 100% baseado em casos clínicos reais, com o método de investigação diagnóstica em 5 etapas da Dra. Alessandra Vargas.</p>
+    <a class="btn" href="#oferta">Quero dominar a endocrinologia<small>Acesso imediato · 12 meses de acesso</small></a>
+    <p class="btn-note">Curso online gravado · Assista quando e onde quiser</p>
+
+    <!-- VSL: substituir este bloco pelo embed do vídeo quando definido -->
+    <div class="vsl">
+      <div class="play">
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="#1d1503"><path d="M0 0 L26 15 L0 30 Z"/></svg>
+      </div>
+      <span>Assista e entenda como funciona o método</span>
+    </div>
+
+    <div class="hero-meta">
+      <span>🎬 <b>21 videoaulas</b> em Full HD</span>
+      <span>📚 <b>10 módulos</b> · quase 6h de conteúdo</span>
+      <span>🩺 <b>Casos clínicos reais</b> do consultório</span>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= DORES ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Você se reconhece?</span>
+      <h2>A graduação não te ensinou endócrino.<br>E o paciente está na sua frente.</h2>
+      <p class="lead narrow">Se você atende cães e gatos na clínica geral, provavelmente já sentiu isso na pele:</p>
+    </div>
+    <div class="pains">
+      <div class="pain"><span class="x">✕</span><b>Insegurança na hora de fechar o diagnóstico</b> — e o medo real de errar e prejudicar (ou perder) o paciente.</div>
+      <div class="pain"><span class="x">✕</span><b>"Não tenho base de endócrino da graduação"</b> — a faculdade quase não ensina endocrinologia, e você sente essa lacuna todos os dias.</div>
+      <div class="pain"><span class="x">✕</span><b>Consultar o livro escondido durante a consulta</b> — e a vergonha de não conseguir responder na hora.</div>
+      <div class="pain"><span class="x">✕</span><b>Não saber quando pedir cada exame</b> — nem como interpretar os testes hormonais quando o resultado chega.</div>
+      <div class="pain"><span class="x">✕</span><b>Pedir exame errado e cair em falsos positivos</b> — gastando o dinheiro do tutor à toa e "atirando para todos os lados" sem um roteiro.</div>
+      <div class="pain"><span class="x">✕</span><b>Sensação de desvalorização</b> — "estudei tanto e não progrido". Você comprou o Ettinger, o Nelson &amp; Couto… e não consegue aplicar na correria da rotina.</div>
+    </div>
+    <blockquote class="bigquote">
+      "A doença não chega na segunda-feira dizendo: 'sou o hipotiroidismo'."
+      <footer>— Dra. Alessandra Vargas</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ======================= VIRADA ======================= -->
+<section>
+  <div class="wrap narrow center">
+    <span class="kicker">A boa notícia</span>
+    <h2>Você já sabe endocrinologia.<br class="gold">Você só não sabe que sabe.</h2>
+    <p class="lead" style="margin-bottom:22px">O que falta não é mais um livro de 2.000 páginas. É um <b style="color:var(--cream)">roteiro de raciocínio clínico</b>: saber o que investigar, em que ordem, qual exame pedir em cada momento — e quando <i>não</i> testar.</p>
+    <p class="lead" style="margin-bottom:22px">Foi exatamente essa a virada da Dra. Alessandra Vargas. Nas palavras dela:</p>
+    <blockquote class="bigquote" style="text-align:left">
+      "Eu era como você — andava com o Ettinger debaixo do braço porque não confiava nos meus diagnósticos. Demorei quase 10 anos sofrendo até dominar. <b>Você não precisa demorar tudo isso.</b>"
+      <footer>— Dra. Alessandra Vargas</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ======================= MÉTODO CSI ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">O mecanismo do curso</span>
+      <h2>O Método CSI da Alê</h2>
+      <p class="lead narrow">Um sistema de investigação diagnóstica em 5 etapas, inspirado nas séries de investigação criminal. A pergunta que guia tudo: <b style="color:var(--gold)">"Quem matou a homeostase?"</b></p>
+    </div>
+    <div class="steps narrow">
+      <div class="step">
+        <div class="num">1</div>
+        <div><h3><span>Etapa 1</span>Indícios do Crime</h3><p>Os sintomas. As endocrinopatias causam manifestações clínicas sistêmicas — é assim que nasce a suspeita.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div><h3><span>Etapa 2</span>CSI Lab</h3><p>Os exames complementares: a base mínima de dados que sustenta (ou derruba) cada hipótese diagnóstica.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div><h3><span>Etapa 3</span>DNA do Diagnóstico</h3><p>Os testes hormonais — pedidos só na hora certa, para não cair em falsos positivos nem gastar o dinheiro do tutor à toa.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div><h3><span>Etapa 4</span>Protocolo de Ação</h3><p>O tratamento: doses, condutas e ajustes com base em consensos e na experiência clínica da professora.</p></div>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <div><h3><span>Etapa 5</span>Liberdade Condicional</h3><p>O monitoramento: acompanhar a resposta do paciente e saber exatamente o que reavaliar, e quando.</p></div>
+      </div>
+    </div>
+    <div class="center" style="margin-top:44px">
+      <a class="btn" href="#oferta">Quero aprender o método</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTEÚDO ======================= -->
+<section>
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">O que você vai aprender</span>
+      <h2>10 módulos, 21 aulas — 100% por casos clínicos reais</h2>
+      <p class="lead narrow">Gravado ao vivo em uma imersão de dia inteiro, com casos discutidos em tempo real — inclusive casos que outros veterinários erraram. Não é teoria de livro: é raciocínio clínico aplicado.</p>
+    </div>
+
+    <div class="course-stats">
+      <div class="stat"><b>21</b><span>videoaulas</span></div>
+      <div class="stat"><b>10</b><span>módulos</span></div>
+      <div class="stat"><b>~6h</b><span>de conteúdo</span></div>
+      <div class="stat"><b>1080p</b><span>Full HD</span></div>
+    </div>
+
+    <div class="modules narrow">
+      <details class="mod" open>
+        <summary><span class="m-num">Módulo 1</span>Fundamentos do Raciocínio Endocrinológico<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>A Lacuna da Graduação em Endocrinologia — e a Origem do Método Endocrinovet</b> <span class="dur">· 24 min</span></li>
+          <li><b>Fisiologia Hormonal Aplicada:</b> Receptores, Órgãos-Alvo e Manifestações Sistêmicas <span class="dur">· 20 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 2</span>Hipertensão Arterial: Abordagem Diagnóstica<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Hipertensão Arterial em Cães e Gatos:</b> Diagnósticos Diferenciais em 3 Casos Clínicos <span class="dur">· 23 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 3</span>Hipercortisolismo: Diagnóstico e Armadilhas<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Síndrome de Cushing:</b> Fenótipo Clínico, Testes Adrenais e Sensibilidade × Especificidade <span class="dur">· 19 min</span></li>
+          <li><b>Alterações Laboratoriais no Hipercortisolismo:</b> O Que Confirma e O Que Contradiz <span class="dur">· 17 min</span></li>
+          <li><b>Diagnóstico Diferencial Sistematizado:</b> PU/PD, Anemia Arregenerativa e Hipoalbuminemia <span class="dur">· 19 min</span></li>
+          <li><b>Síndrome Hepatocutânea e o Falso Positivo no Teste Adrenal:</b> Quando NÃO Testar <span class="dur">· 14 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 4</span>O Método de Investigação Diagnóstica<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>O Método CSI da Alê:</b> As 5 Etapas da Investigação Diagnóstica Endócrina — o coração do curso <span class="dur">· 18 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 5</span>Hipotiroidismo Canino<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Obesidade × Endocrinopatia:</b> Hiperlipidemia Grave e Síndrome do Eutireoideo Doente <span class="dur">· 18 min</span></li>
+          <li><b>Hipotiroidismo Canino:</b> Levotiroxina, Teste de Reposição Hormonal e Monitoramento <span class="dur">· 25 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 6</span>Hipoadrenocorticismo: O Grande Imitador<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Hipoadrenocorticismo I:</b> Apresentação Atípica e as Complicações do Caso Real <span class="dur">· 14 min</span></li>
+          <li><b>Eletrólitos na Prática:</b> Interpretação da Razão Sódio:Potássio e Seus Diferenciais <span class="dur">· 17 min</span></li>
+          <li><b>Hipoadrenocorticismo II:</b> Teste de Estimulação com ACTH, DOCP (Zycortal) e Monitoramento <span class="dur">· 15 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 7</span>Doença Poliglandular Autoimune<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Anemia Arregenerativa Persistente:</b> Investigação Diagnóstica por Exclusão <span class="dur">· 10 min</span></li>
+          <li><b>Doença Endócrina Poliglandular Autoimune:</b> Tireoidite Linfocítica em Fase Ativa — caso raro digno de publicação científica <span class="dur">· 17 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 8</span>Testes Hormonais: Indicações e Interpretação<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Dosagens Hormonais:</b> Indicações Corretas e os Critérios do Consenso Para Testar <span class="dur">· 15 min</span></li>
+          <li><b>Teste Negativo com Suspeita Clínica Persistente:</b> Conduta, Repetição e Alopecia X <span class="dur">· 8 min</span></li>
+          <li><b>Teste de Supressão com Dexametasona:</b> Protocolo de 3 Coletas e Interpretação <span class="dur">· 19 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 9</span>Diabetes Mellitus na Prática Clínica<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Diabetes Mellitus Descompensado:</b> Manejo da Insulinoterapia e Monitoramento Contínuo <span class="dur">· 12 min</span></li>
+          <li><b>Encerramento:</b> O Mapa Integrado da Endocrinologia Clínica <span class="dur">· 13 min</span></li>
+        </ul>
+      </details>
+      <details class="mod">
+        <summary><span class="m-num">Módulo 10</span>O Segredo Para Atender Endocrinopatias Com Total Confiança<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <ul>
+          <li><b>Descubra o Passo Definitivo</b> Para Identificar e Tratar Endocrinopatias Com Total Confiança <span class="dur">· 34 min</span></li>
+        </ul>
+      </details>
+    </div>
+
+    <p class="center lead" style="margin-top:34px;font-size:15.5px">Doenças cobertas em profundidade: <b style="color:var(--cream)">síndrome de Cushing, hipotiroidismo canino, hipoadrenocorticismo, diabetes mellitus (cão e gato)</b> e a interpretação de todos os testes hormonais — além de hipertiroidismo felino, síndrome hepatocutânea, doença poliglandular, alopecia X, hiperlipidemias e eutireoideo doente.</p>
+  </div>
+</section>
+
+<!-- ======================= DEPOIMENTOS ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Quem já aplicou o método</span>
+      <h2>De "perdida, sem roteiro" a fechar diagnóstico com confiança</h2>
+    </div>
+    <div class="testis">
+      <div class="testi hl">
+        <div class="stars">★★★★★</div>
+        <p>"Apesar do pouco tempo que eu tenho para estudar — tenho casa para cuidar, tenho filhos — em UM MÊS eu já estava fazendo diagnóstico com confiança. Foi uma virada de chave."</p>
+        <footer>Aluna do método</footer>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"A maior dificuldade que eu tinha era realmente referente ao diagnóstico. A Alessandra me entregou de forma muito prática — hoje tenho um norte, clareza de em que momento pedir cada exame."</p>
+        <footer>Aluna do método</footer>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Me trouxe mais confiança, aumentou a velocidade do meu raciocínio. Me sinto capaz de diagnosticar, de tratar, de conduzir o caso."</p>
+        <footer>Aluna do método</footer>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Antes do método eu ficava toda hora olhando o livro. Hoje tenho calma: olho o exame e faço as perguntas corretas."</p>
+        <footer>Aluna do método</footer>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Eu ficava perdida porque não tinha um roteiro. Com o curso eu consegui montar um roteiro e ter certeza de que estava no caminho certo."</p>
+        <footer>Aluna do método</footer>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Poder explicar com segurança para um colega por que aquele animal NÃO tem hipotiroidismo… isso foi maravilhoso."</p>
+        <footer>Aluna do método</footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BIO ======================= -->
+<section>
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Sua professora</span>
+      <h2>Dra. Alessandra Vargas</h2>
+    </div>
+    <div class="bio">
+      <div class="bio-photo">Foto da Dra. Alessandra Vargas<br>(substituir por imagem em alta resolução)</div>
+      <div>
+        <p class="lead">Referência em endocrinologia veterinária no Brasil — e alguém que já esteve exatamente onde você está.</p>
+        <ul>
+          <li><b>Médica-veterinária formada pela USP</b> (1997), com <b>mestrado na USP</b> em endocrinologia</li>
+          <li>5 anos de clínica geral + 4 anos de internação e emergência — ela conhece a sua rotina</li>
+          <li>Desde <b>2006 atende exclusivamente endocrinologia veterinária</b></li>
+          <li>Em <b>2010 criou o primeiro curso de pós-graduação em endocrinologia veterinária da América Latina</b> — até hoje é coordenadora e professora</li>
+          <li>Criadora do <b>Método Endocrinovet</b> e do <b>Método CSI da Alê</b></li>
+          <li>Produz conteúdo educativo para veterinários no Instagram e no YouTube</li>
+        </ul>
+        <blockquote class="bigquote" style="margin-top:28px;font-size:20px">
+          "Endocrinologia é a especialidade mais importante que existe: tudo produz hormônio."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARA QUEM É ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Antes de entrar</span>
+      <h2>O Protocolo Endocrinovet é para você?</h2>
+    </div>
+    <div class="cols2">
+      <div class="who yes">
+        <h3>✓ É para você que…</h3>
+        <ul>
+          <li>Atende cães e gatos na <b>clínica geral</b> — de recém-formado(a) a experiente</li>
+          <li>É estudante de veterinária em fim de curso e quer chegar preparado(a) na rotina</li>
+          <li>Trava na hora de investigar uma suspeita endócrina e quer um <b>roteiro claro</b></li>
+          <li>Quer saber <b>quando pedir cada exame</b> e como interpretar testes hormonais</li>
+          <li>Tem pouco tempo para estudar e precisa de conteúdo direto ao ponto, por casos reais</li>
+        </ul>
+      </div>
+      <div class="who no">
+        <h3>✕ Não é para você que…</h3>
+        <ul>
+          <li>Procura uma enciclopédia A-Z de todas as endocrinopatias — o curso é <b>raciocínio clínico aplicado</b>, por casos</li>
+          <li>Quer fórmulas prontas sem desenvolver o próprio raciocínio diagnóstico</li>
+          <li>Não atua (nem pretende atuar) com clínica de pequenos animais</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OFERTA ======================= -->
+<section class="offer" id="oferta">
+  <div class="wrap center">
+    <span class="kicker">Sua decisão</span>
+    <h2>Comece hoje a atender endócrino com confiança</h2>
+    <p class="lead narrow">"Eu demorei quase 10 anos para chegar lá. <b style="color:var(--cream)">Você não precisa.</b>"</p>
+
+    <div class="offer-card">
+      <div class="prod">Protocolo <span class="gold">Endocrinovet</span></div>
+      <div class="tagline">Endocrinologia veterinária na prática, por casos clínicos reais</div>
+      <ul>
+        <li><b>21 videoaulas</b> em Full HD 1080p (~6h de conteúdo)</li>
+        <li><b>10 módulos</b> com aulas diretas ao ponto (8 a 34 min)</li>
+        <li>O <b>Método CSI da Alê</b>: as 5 etapas da investigação diagnóstica</li>
+        <li>Casos clínicos reais — incluindo os que outros veterinários erraram</li>
+        <li>Acesso imediato, para assistir no seu ritmo</li>
+      </ul>
+      <div class="price-old">Somente nesta condição especial</div>
+      <div class="price"><sup>R$</sup>97</div>
+      <div class="price-note">pagamento único · ou parcele no cartão</div>
+      <!-- Substituir href pelo link de checkout (Hotmart/Kiwify etc.) -->
+      <a class="btn" href="#" style="width:100%">QUERO ENTRAR NO PROTOCOLO<small>Acesso imediato após a confirmação</small></a>
+      <p class="btn-note">🔒 Compra segura · Garantia incondicional de 7 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GARANTIA ======================= -->
+<section>
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal"><b>7</b><span>dias de<br>garantia</span></div>
+      <div>
+        <h3>Risco zero por 7 dias</h3>
+        <p>Entre, assista às aulas e aplique o método nos seus próximos atendimentos. Se dentro de 7 dias você sentir que o Protocolo Endocrinovet não é para você, basta pedir o reembolso — devolvemos 100% do valor, sem perguntas e sem burocracia, conforme o Código de Defesa do Consumidor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="alt">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker">Dúvidas frequentes</span>
+      <h2>Perguntas &amp; respostas</h2>
+    </div>
+    <div class="faq">
+      <details class="q">
+        <summary>Por quanto tempo terei acesso ao curso?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>O acesso é liberado imediatamente após a confirmação do pagamento e você pode assistir às aulas quando e quantas vezes quiser, no computador ou no celular, dentro do período de acesso da sua compra.</p>
+      </details>
+      <details class="q">
+        <summary>Serve para recém-formado(a)?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>Sim. O curso foi pensado justamente para quem sente a lacuna da graduação em endocrinologia — do recém-formado ao clínico experiente. O Módulo 1 constrói a base do raciocínio antes de mergulhar nos casos.</p>
+      </details>
+      <details class="q">
+        <summary>Funciona para quem atende só clínica geral?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>É exatamente o público do curso: o clínico geral de pequenos animais que recebe o paciente endócrino no dia a dia e quer investigar e conduzir com segurança — sabendo também a hora certa de encaminhar.</p>
+      </details>
+      <details class="q">
+        <summary>É teoria de livro ou prática?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>100% baseado em casos clínicos reais da Dra. Alessandra — incluindo casos que outros veterinários erraram. É raciocínio clínico aplicado, com diagnósticos diferenciais como ferramenta central, e não uma enciclopédia teórica.</p>
+      </details>
+      <details class="q">
+        <summary>Tenho pouco tempo para estudar. Consigo acompanhar?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>As aulas têm de 8 a 34 minutos, direto ao ponto, e o curso é gravado — você estuda no seu ritmo, no horário que der. Uma aluna com casa e filhos relatou estar fechando diagnósticos com confiança em um mês de estudo.</p>
+      </details>
+      <details class="q">
+        <summary>E se eu não gostar?<svg class="chev" width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1l7 7 7-7" stroke="currentColor" stroke-width="2"/></svg></summary>
+        <p>Você tem 7 dias de garantia incondicional. Se o curso não for para você, é só pedir o reembolso dentro desse prazo e devolvemos 100% do valor.</p>
+      </details>
+    </div>
+    <div class="center" style="margin-top:46px">
+      <a class="btn" href="#oferta">Quero entrar no Protocolo Endocrinovet<small>R$ 97 · pagamento único</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RODAPÉ ======================= -->
+<footer class="site">
+  <div class="wrap">
+    <div class="logo">Endocrino<span>vet</span></div>
+    <p>Protocolo Endocrinovet · Dra. Alessandra Vargas — Endocrinologia Veterinária</p>
+    <p>Conteúdo educacional destinado a médicos-veterinários e estudantes de medicina veterinária. As condutas apresentadas baseiam-se em consensos e na experiência clínica da professora e não substituem o julgamento clínico individual de cada caso.</p>
+    <p style="margin-top:16px">© 2026 Endocrinovet. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+</body>
+</html>
