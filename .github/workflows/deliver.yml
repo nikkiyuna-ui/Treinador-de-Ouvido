@@ -1,0 +1,53 @@
+name: deliver
+on:
+  workflow_dispatch: {}
+  push:
+    branches: ["claude/endocrinovet-aulas-divisao-43b6yv"]
+    paths: [".github/deliver-trigger"]
+permissions:
+  contents: write
+concurrency:
+  group: deliver
+  cancel-in-progress: false
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: replace updated assets in the draft release
+        shell: bash
+        run: |
+          set -e
+          git clone --depth 1 --branch curso-delivery "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" delivery
+          cd delivery
+          shopt -s nullglob
+          for f in *.partaa; do
+            base="${f%.partaa}"
+            cat "${base}".part* > "$base"
+            rm -f "${base}".part*
+          done
+          sha256sum -c manifest.sha256
+          RID=$(gh api "repos/${REPO}/releases" --paginate --jq '[.[] | select(.tag_name=="curso-endocrinovet-aulas-v2")][0].id')
+          if [ -z "$RID" ] || [ "$RID" = "null" ]; then
+            echo "release v2 nao encontrado"; exit 1
+          fi
+          echo "RID=$RID"
+          gh api "repos/${REPO}/releases/${RID}/assets" --paginate --jq '.[] | "\(.id) \(.name)"' > /tmp/assets.txt || true
+          for f in *.mp4; do
+            AID=$(awk -v n="$f" '$2==n{print $1}' /tmp/assets.txt | head -1)
+            if [ -n "$AID" ]; then
+              echo "removendo asset antigo: $f ($AID)"
+              gh api -X DELETE "repos/${REPO}/releases/assets/${AID}" || true
+            fi
+            echo "upload: $f ($(stat -c%s "$f") bytes)"
+            curl -sS --fail-with-body -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Content-Type: video/mp4" \
+              -T "$f" \
+              "https://uploads.github.com/repos/${REPO}/releases/${RID}/assets?name=${f}" -o /dev/null
+          done
+          git push origin --delete curso-delivery || true
+          echo "DELIVER-DONE rid=$RID"
