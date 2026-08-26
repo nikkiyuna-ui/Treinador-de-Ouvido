@@ -108,6 +108,29 @@
   .btn.primary{background:var(--roxo); border-color:var(--roxo); font-weight:700}
   .btn:disabled{opacity:.35; cursor:not-allowed}
 
+  /* ---------- braço do violão (níveis de nota) ---------- */
+  .stage.compact{flex-direction:row; min-height:0; padding:14px 16px; gap:14px}
+  .stage.compact .msg{text-align:left; flex:1; font-size:13px}
+  .stage.compact .pulse{width:46px; height:46px; font-size:20px}
+  .stage.compact .big{font-size:26px; flex-shrink:0}
+  .boardwrap{background:var(--abismo); border:1px solid rgba(180,140,250,.45); padding:12px 10px 6px; margin-bottom:14px}
+  .boardlbl{font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(240,236,255,.72); margin:0 0 8px 4px}
+  .board{display:grid; grid-template-columns:52px repeat(5,1fr); grid-template-rows:repeat(6,44px) 22px; position:relative}
+  .board.mudo{pointer-events:none; opacity:.65}
+  .nut{grid-column:2; grid-row:1/7; width:4px; height:100%; background:rgba(240,236,255,.55); justify-self:start; pointer-events:none; z-index:1}
+  .inlay{grid-row:1/7; place-self:center; width:11px; height:11px; border-radius:50%; background:rgba(180,140,250,.28); pointer-events:none}
+  .sline{grid-column:2/-1; align-self:center; background:linear-gradient(180deg, rgba(240,236,255,.28), var(--corda), rgba(0,0,0,.4)); pointer-events:none; z-index:0; width:100%}
+  .cel{position:relative; z-index:2; display:flex; align-items:center; justify-content:center; cursor:pointer}
+  .cel:not(.open){border-right:2px solid rgba(240,236,255,.22)}
+  .cel .sname{font-family:'Garet',sans-serif; font-weight:700; font-size:13px; color:var(--corda)}
+  .mark{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; border-radius:50%; background:radial-gradient(circle, var(--corda), var(--roxo)); z-index:3; pointer-events:none; animation:pop .5s ease-out forwards}
+  @keyframes pop{from{opacity:.95} to{opacity:0; transform:translate(-50%,-50%) scale(1.7)}}
+  .mark.fixo{animation:none; width:30px; height:30px; background:#14532d; border:1px solid var(--ok); color:var(--ok); display:flex; align-items:center; justify-content:center; font-family:'Garet',sans-serif; font-weight:700; font-size:11px}
+  .fnum{grid-row:7; display:flex; align-items:center; justify-content:center; font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:rgba(240,236,255,.55)}
+  .answers.notas{grid-template-columns:repeat(4,1fr); gap:8px}
+  .answers.notas .abtn{font-size:20px; padding:13px 0}
+  .answers.notas .abtn small{font-size:8px; margin-top:3px}
+
   /* ---------- resultado ---------- */
   .res-big{font-family:'Garet',sans-serif; font-weight:900; font-size:64px; text-align:center; margin:26px 0 0}
   .res-sub{text-align:center; font-size:13px; color:rgba(240,236,255,.82); margin-bottom:24px}
@@ -132,7 +155,7 @@
       <div class="ouvido">de Ouvido</div>
     </div>
     <div class="apptitle">Treinador de Ouvido</div>
-    <p class="appsub">O jogo que treina seu ouvido a reconhecer os graus do campo harmônico, o coração de tocar de ouvido. Fone no ouvido, violão por perto, e bora pra cima.</p>
+    <p class="appsub">O jogo que treina seu ouvido em dois passos: primeiro as notas no braço do violão, depois os graus do campo harmônico, o coração de tocar de ouvido. Fone no ouvido, violão por perto, e bora pra cima.</p>
 
     <div class="patente">
       <div class="medal" id="pat-medal">🎸</div>
@@ -145,7 +168,7 @@
     <div class="levels" id="levels"></div>
 
     <div class="howto">
-      <b>Como funciona:</b> em cada rodada, o app toca primeiro a <b>cama do tom</b> (a sequência 1–4–5–1, pra ancorar seu ouvido) e depois toca o <b>acorde-mistério</b>. Seu trabalho: dizer qual grau você ouviu. Não é sobre o nome do acorde: é sobre a <b>sonoridade do grau</b>. Passe de nível acertando o mínimo exigido.
+      <b>Como funciona:</b> nos primeiros níveis, o app toca uma <b>nota-mistério</b> e você procura o som dela tocando no <b>braço do violão</b>, até achar e marcar o nome da nota. Nos níveis seguintes, o app toca a <b>cama do tom</b> (a sequência 1–4–5–1, pra ancorar seu ouvido) e depois o <b>acorde-mistério</b>, e você diz qual grau ouviu. Não é sobre decorar: é sobre a <b>sonoridade</b>. Passe de nível acertando o mínimo exigido.
     </div>
 
     <div class="foot">Método TDO · 2026</div>
@@ -169,6 +192,11 @@
       <div class="msg" id="g-msg">Toque em OUVIR para começar.</div>
       <div class="big" id="g-big" style="display:none"></div>
       <div class="seqslots" id="g-slots" style="display:none"></div>
+    </div>
+
+    <div class="boardwrap" id="g-board" style="display:none">
+      <div class="boardlbl">Braço do violão · toque para ouvir</div>
+      <div class="board" id="board"></div>
     </div>
 
     <div class="answers" id="g-answers"></div>
@@ -217,13 +245,47 @@ const GRAUS = {
 };
 const ALL = ['1','2m','3m','4','5','6m'];
 
+/* ---------------- notas no braço (níveis de nota) ---------------- */
+const NOTAS = ['Dó','Dó#','Ré','Ré#','Mi','Fá','Fá#','Sol','Sol#','Lá','Lá#','Si'];
+const CIFRA = {'Dó':'C','Dó#':'C#','Ré':'D','Ré#':'D#','Mi':'E','Fá':'F','Fá#':'F#','Sol':'G','Sol#':'G#','Lá':'A','Lá#':'A#','Si':'B'};
+/* cordas de cima (aguda) pra baixo (grave), como numa tablatura */
+const CORDAS = [
+  {nome:'Mi', midi:64, esp:1.4},
+  {nome:'Si', midi:59, esp:1.7},
+  {nome:'Sol',midi:55, esp:2.0},
+  {nome:'Ré', midi:50, esp:2.4},
+  {nome:'Lá', midi:45, esp:2.9},
+  {nome:'Mi', midi:40, esp:3.4},
+];
+const NFRETS = 5;
+function pcNota(m){ return ((m%12)+12)%12; }
+function nomeNota(m){ return NOTAS[pcNota(m)]; }
+/* posições de onde a nota-mistério pode sair no nível */
+function posicoesNivel(lv){
+  const out=[];
+  CORDAS.forEach((c,si)=>{
+    for(let f=0; f<=lv.frets; f++){
+      const m=c.midi+f;
+      if(lv.naturais && NOTAS[pcNota(m)].includes('#')) continue;
+      out.push({s:si, f, m});
+    }
+  });
+  return out;
+}
+function nomesNivel(lv){
+  const set = new Set(posicoesNivel(lv).map(p=>nomeNota(p.m)));
+  return NOTAS.filter(n=>set.has(n));
+}
+
 const LEVELS = [
-  {n:1, name:'O Bordão',       desc:'Tônica ou dominante? 1 ou 5, o primeiro passo do ouvido.', pool:['1','5'],           rounds:10, pass:7, type:'single'},
-  {n:2, name:'Os 3 Grandes',   desc:'1, 4 e 5: os pilares de quase toda música que você ama.',  pool:['1','4','5'],       rounds:10, pass:7, type:'single'},
-  {n:3, name:'O Relativo',     desc:'Entra o 6m, o acorde da emoção. Gospel e sertanejo vivem dele.', pool:['1','4','5','6m'], rounds:10, pass:7, type:'single'},
-  {n:4, name:'Campo Completo', desc:'Os 6 graus. O campo harmônico inteiro no seu ouvido.',      pool:ALL,                 rounds:10, pass:7, type:'single'},
-  {n:5, name:'Sequências',     desc:'Ouça a progressão inteira: 4 acordes, na ordem certa.',    pool:['1','4','5','6m'],  rounds:6,  pass:4, type:'seq'},
-  {n:6, name:'Modo Palco',     desc:'O tom muda a cada rodada. Ouvido relativo de verdade, impossível decorar.', pool:ALL, rounds:10, pass:7, type:'single', keyPerRound:true},
+  {n:1, name:'Cordas Soltas',    desc:'Ouça a nota e ache o som dela nas 6 cordas soltas. O primeiro mapa do braço.', rounds:6, pass:4, type:'nota', frets:0, naturais:false},
+  {n:2, name:'Primeira Posição', desc:'Notas naturais até a casa 3: a região onde nascem os primeiros acordes.', rounds:8, pass:6, type:'nota', frets:3, naturais:true},
+  {n:3, name:'O Bordão',       desc:'Tônica ou dominante? 1 ou 5, o primeiro passo do ouvido.', pool:['1','5'],           rounds:10, pass:7, type:'single'},
+  {n:4, name:'Os 3 Grandes',   desc:'1, 4 e 5: os pilares de quase toda música que você ama.',  pool:['1','4','5'],       rounds:10, pass:7, type:'single'},
+  {n:5, name:'O Relativo',     desc:'Entra o 6m, o acorde da emoção. Gospel e sertanejo vivem dele.', pool:['1','4','5','6m'], rounds:10, pass:7, type:'single'},
+  {n:6, name:'Campo Completo', desc:'Os 6 graus. O campo harmônico inteiro no seu ouvido.',      pool:ALL,                 rounds:10, pass:7, type:'single'},
+  {n:7, name:'Sequências',     desc:'Ouça a progressão inteira: 4 acordes, na ordem certa.',    pool:['1','4','5','6m'],  rounds:6,  pass:4, type:'seq'},
+  {n:8, name:'Modo Palco',     desc:'O tom muda a cada rodada. Ouvido relativo de verdade, impossível decorar.', pool:ALL, rounds:10, pass:7, type:'single', keyPerRound:true},
 ];
 
 const PROGRESSOES = [
@@ -235,23 +297,31 @@ const PROGRESSOES = [
 const PATENTES = [
   {min:1, nome:'Ouvido Iniciante',        medal:'🎸'},
   {min:3, nome:'Destravado',             medal:'🎶'},
-  {min:5, nome:'Ouvido Ativo',           medal:'👂'},
-  {min:7, nome:'Faixa Preta do Ouvido',  medal:'🥋'},
+  {min:6, nome:'Ouvido Ativo',           medal:'👂'},
+  {min:9, nome:'Faixa Preta do Ouvido',  medal:'🥋'},
 ];
 
 /* progresso do aluno — persistido em localStorage (fechar e reabrir mantém níveis e patente) */
 const PROG_KEY = 'tdo-treinador-prog';
 
 function loadProg(){
-  const fresh = { unlocked:1, done:{} };
+  const fresh = { v:2, unlocked:1, done:{} };
   try{
     const raw = localStorage.getItem(PROG_KEY);
     if(!raw) return fresh;
-    const d = JSON.parse(raw);
+    let d = JSON.parse(raw);
+    /* migração v1→v2: entraram 2 níveis de nota antes dos de acorde,
+       então o progresso antigo anda 2 casas pra frente */
+    if(!d.v){
+      const antigo = parseInt(d.unlocked,10)||1;
+      const doneNovo = {};
+      if(d.done && typeof d.done==='object') Object.keys(d.done).forEach(n=>{ if(d.done[n]) doneNovo[parseInt(n,10)+2]=true; });
+      d = { v:2, unlocked: antigo>1 ? antigo+2 : 1, done: doneNovo };
+    }
     const unlocked = Math.min(Math.max(parseInt(d.unlocked,10)||1, 1), LEVELS.length+1);
     const done = {};
     if(d.done && typeof d.done==='object') LEVELS.forEach(lv=>{ if(d.done[lv.n]) done[lv.n]=true; });
-    return { unlocked, done };
+    return { v:2, unlocked, done };
   }catch(e){
     /* navegador embutido (WhatsApp/Instagram) pode bloquear localStorage — segue em memória */
     return fresh;
@@ -408,6 +478,7 @@ function playCadence(keyMidi, when){
 /* ---------------- ESTADO DO JOGO ---------------- */
 let LV=null, round=0, hits=0, score=0, streak=0, best=0;
 let keyMidi=45, answer=null, answerSeq=[], userSeq=[], phase='idle';
+let alvoNota=null, ultimoNome=null; /* níveis de nota */
 /* phase: idle | listening | answering | feedback */
 
 const $ = id => document.getElementById(id);
@@ -444,16 +515,32 @@ function goHome(){ clearTimers(); phase='idle'; $('g-pulse').classList.remove('p
 function startLevel(lv){
   ensureAudio(); /* gesto do usuário: destrava o áudio e começa o decode dos sons reais já aqui */
   clearTimers();
-  LV = lv; round=0; hits=0; score=0; streak=0; best=0;
+  LV = lv; round=0; hits=0; score=0; streak=0; best=0; ultimoNome=null;
   keyMidi = 43 + Math.floor(Math.random()*8); /* G2..D3 */
   $('g-lvlname').textContent = `Nível ${lv.n} · ${lv.name}`;
+  const ehNota = lv.type==='nota';
+  $('g-board').style.display = ehNota ? 'block' : 'none';
+  document.querySelector('.stage').classList.toggle('compact', ehNota);
+  if(ehNota) buildBoard();
   renderAnswers();
+  updateHud();
   show('scr-game');
   prepRound();
 }
 
 function renderAnswers(){
   const wrap = $('g-answers'); wrap.innerHTML='';
+  if(LV.type==='nota'){
+    wrap.className = 'answers notas';
+    nomesNivel(LV).forEach(n=>{
+      const b = document.createElement('button');
+      b.className='abtn'; b.id='ab-'+CIFRA[n]; b.disabled=true;
+      b.innerHTML = n + `<small>${CIFRA[n]}</small>`;
+      b.onclick = ()=>choose(n);
+      wrap.appendChild(b);
+    });
+    return;
+  }
   wrap.className = 'answers' + (LV.pool.length===2 ? ' two' : '');
   LV.pool.forEach(g=>{
     const b = document.createElement('button');
@@ -470,7 +557,15 @@ function prepRound(){
   motorTravado = false;
   userSeq=[];
   if(LV.keyPerRound) keyMidi = 41 + Math.floor(Math.random()*12);
-  if(LV.type==='single'){
+  if(LV.type==='nota'){
+    limparReveal();
+    const poss = posicoesNivel(LV);
+    let p;
+    do { p = poss[Math.floor(Math.random()*poss.length)]; }
+    while(nomeNota(p.m)===ultimoNome && nomesNivel(LV).length>1);
+    alvoNota = p; ultimoNome = nomeNota(p.m);
+    $('g-slots').style.display='none';
+  } else if(LV.type==='single'){
     let g;
     do { g = LV.pool[Math.floor(Math.random()*LV.pool.length)]; } while(g===answer && LV.pool.length>2);
     answer = g;
@@ -482,9 +577,11 @@ function prepRound(){
   $('g-round').textContent = `Rodada ${round} de ${LV.rounds}` + (LV.keyPerRound ? ' · tom novo!' : '');
   $('g-prog').style.width = ((round-1)/LV.rounds*100)+'%';
   $('g-big').style.display='none';
-  $('g-msg').textContent = LV.type==='seq'
-    ? 'Vou tocar a cama do tom e depois 4 acordes. Marque os graus na ordem.'
-    : 'Vou tocar a cama do tom e depois o acorde-mistério.';
+  $('g-msg').textContent = LV.type==='nota'
+    ? 'Vou tocar a nota-mistério. Depois, procure o som dela no braço.'
+    : (LV.type==='seq'
+      ? 'Vou tocar a cama do tom e depois 4 acordes. Marque os graus na ordem.'
+      : 'Vou tocar a cama do tom e depois o acorde-mistério.');
   setAnswerButtons(false);
   $('g-next').textContent='Ouvir'; $('g-next').disabled=false;
   $('g-replay').disabled=true;
@@ -500,17 +597,99 @@ function renderSlots(){
   }
 }
 
+/* ---------------- BRAÇO DO VIOLÃO (níveis de nota) ---------------- */
+const cels = [];
+function buildBoard(){
+  const b = $('board'); b.innerHTML=''; cels.length=0;
+  const nut = document.createElement('div'); nut.className='nut'; b.appendChild(nut);
+  [3,5].forEach(f=>{
+    const d = document.createElement('div'); d.className='inlay';
+    d.style.gridColumn = f+1; b.appendChild(d);
+  });
+  CORDAS.forEach((c,si)=>{
+    const line = document.createElement('div'); line.className='sline';
+    line.style.gridRow = si+1; line.style.height = c.esp+'px';
+    b.appendChild(line);
+    cels[si]=[];
+    for(let f=0; f<=NFRETS; f++){
+      const cel = document.createElement('div');
+      cel.className = 'cel' + (f===0?' open':'');
+      cel.style.gridRow = si+1; cel.style.gridColumn = f+1;
+      if(f===0) cel.innerHTML = `<span class="sname">${c.nome}</span>`;
+      cel.onpointerdown = ()=>tapCel(si,f,cel);
+      cels[si][f] = cel;
+      b.appendChild(cel);
+    }
+  });
+  for(let f=0; f<=NFRETS; f++){
+    const d = document.createElement('div'); d.className='fnum';
+    d.style.gridRow = 7; d.style.gridColumn = f+1;
+    d.textContent = f===0 ? 'solta' : f;
+    b.appendChild(d);
+  }
+}
+
+function tapCel(si,f,cel){
+  ensureAudio();
+  if(phase==='listening') return;
+  playNote(CORDAS[si].midi+f, ctx.currentTime, 0.9);
+  const mk = document.createElement('span'); mk.className='mark';
+  cel.appendChild(mk);
+  setTimeout(()=>mk.remove(), 520);
+}
+
+function limparReveal(){ document.querySelectorAll('.mark.fixo').forEach(e=>e.remove()); }
+
+/* acende todos os lugares do braço onde a nota mora */
+function reveal(pcAlvo){
+  limparReveal();
+  CORDAS.forEach((c,si)=>{
+    for(let f=0; f<=NFRETS; f++){
+      if(pcNota(c.midi+f)===pcAlvo){
+        const mk = document.createElement('span');
+        mk.className='mark fixo'; mk.textContent = NOTAS[pcAlvo];
+        cels[si][f].appendChild(mk);
+      }
+    }
+  });
+}
+
+function answerIds(){
+  return LV.type==='nota' ? nomesNivel(LV).map(n=>'ab-'+CIFRA[n]) : LV.pool.map(g=>'ab-'+g);
+}
 function resetButtonStyles(){
-  LV.pool.forEach(g=>{ const b=$('ab-'+g); b.classList.remove('ok','erro'); });
+  answerIds().forEach(id=>{ $(id).classList.remove('ok','erro'); });
 }
 
 function setAnswerButtons(on){
-  LV.pool.forEach(g=>{ $('ab-'+g).disabled = !on; });
+  answerIds().forEach(id=>{ $(id).disabled = !on; });
 }
 
 /* ---------------- ÁUDIO DA RODADA ---------------- */
+/* rodada dos níveis de nota: sem cama do tom — só a nota-mistério, 2x */
+function playRoundNota(){
+  phase='listening';
+  $('board').classList.add('mudo');
+  $('g-pulse').classList.add('playing');
+  $('g-msg').textContent = 'Ouvindo a nota-mistério...';
+  setAnswerButtons(false);
+  $('g-next').disabled=true; $('g-replay').disabled=true;
+  const t0 = ctx.currentTime + 0.15;
+  playNote(alvoNota.m, t0, 0.95);
+  playNote(alvoNota.m, t0+1.05, 0.8);
+  schedule(()=>{
+    phase='answering';
+    $('board').classList.remove('mudo');
+    $('g-pulse').classList.remove('playing');
+    $('g-msg').textContent = '🎯 Procure o som no braço. Achou? Marque o nome da nota.';
+    setAnswerButtons(true);
+    $('g-replay').disabled=false;
+  }, t0+2.1);
+}
+
 function playRound(){
   ensureAudio();
+  if(LV.type==='nota'){ playRoundNota(); return; }
   /* dedo rápido na 1ª rodada: dá até 350ms pro decode dos sons reais terminar
      antes de abrir a cama do tom (espera única — nunca por rodada) */
   if(samplesTotal && !samplesOk() && !esperouSamples){
@@ -576,6 +755,34 @@ function replayRound(){
 /* ---------------- RESPOSTA ---------------- */
 function choose(g){
   if(phase!=='answering') return;
+
+  if(LV.type==='nota'){
+    phase='feedback';
+    setAnswerButtons(false);
+    $('g-replay').disabled=true;
+    const certo = nomeNota(alvoNota.m);
+    const correct = g===certo;
+    reveal(pcNota(alvoNota.m));
+    if(correct){
+      hits++; streak++; best=Math.max(best,streak);
+      score += 10 + Math.min(streak-1,5)*2;
+      $('ab-'+CIFRA[g]).classList.add('ok');
+      flashBig('✓ '+certo, true);
+      $('g-msg').textContent = `É ${certo}! Olha no braço: acendi todos os lugares onde ${certo} mora.`;
+    } else {
+      streak=0;
+      $('ab-'+CIFRA[g]).classList.add('erro');
+      $('ab-'+CIFRA[certo]).classList.add('ok');
+      flashBig('era '+certo, false);
+      $('g-msg').textContent = `Era ${certo} — acendi ela no braço. Escuta de novo a diferença.`;
+      ensureAudio();
+      playNote(alvoNota.m, ctx.currentTime+0.35, 0.9);
+    }
+    updateHud();
+    $('g-next').textContent = round>=LV.rounds ? 'Ver resultado' : 'Próxima →';
+    $('g-next').disabled=false;
+    return;
+  }
 
   if(LV.type==='single'){
     phase='feedback';
@@ -653,7 +860,7 @@ function endLevel(){
   if(passed){
     prog.done[LV.n]=true;
     if(LV.n===prog.unlocked && prog.unlocked<LEVELS.length) prog.unlocked++;
-    if(LV.n===6) prog.unlocked=7;
+    if(LV.n===8) prog.unlocked=9;
   }
   saveProg();
   const p = patente();
@@ -661,11 +868,11 @@ function endLevel(){
   $('r-sub').textContent = `Nível ${LV.n} · ${LV.name} · ${score} pontos · melhor sequência 🔥${best}`;
   $('r-patente').textContent = p.medal+' '+p.nome;
   $('r-msg').textContent = passed
-    ? (LV.n===6
+    ? (LV.n===8
         ? 'FAIXA PRETA DO OUVIDO. Você fechou o Treinador inteiro. Seu ouvido não é mais o mesmo. Confia no método.'
-        : `Passou! Nível ${Math.min(LV.n+1,6)} desbloqueado. O que você acabou de fazer, a maioria dos violonistas passa anos sem conseguir.`)
+        : `Passou! Nível ${Math.min(LV.n+1,8)} desbloqueado. O que você acabou de fazer, a maioria dos violonistas passa anos sem conseguir.`)
     : `Faltou pouco. Você precisa de ${LV.pass} acertos pra passar. Isso não é falta de dom: é ouvido em construção. Joga de novo.`;
-  $('r-nextlvl').style.display = (passed && LV.n<6) ? 'block' : 'none';
+  $('r-nextlvl').style.display = (passed && LV.n<8) ? 'block' : 'none';
   $('g-prog').style.width='100%';
   show('scr-res');
 }
